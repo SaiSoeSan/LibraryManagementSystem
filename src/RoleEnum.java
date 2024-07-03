@@ -1,4 +1,5 @@
 public enum RoleEnum {
     ADMIN,
-    LIBRARIAN
+    LIBRARIAN,
+    BOTH
 }

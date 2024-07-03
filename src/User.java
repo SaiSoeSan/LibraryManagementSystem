@@ -1,13 +1,11 @@
-import java.util.List;
-
 public class User {
     private String id;
     private String password;
-    private List<Role> roles;
+    private RoleEnum role;
 
-    public User(String id, String password, List<Role> roles) {
+    public User(String id, String password, RoleEnum role) {
         this.id = id;
         this.password = password;
-        this.roles = roles;
+        this.role = role;
     }
 }
