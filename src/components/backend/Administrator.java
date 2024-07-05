@@ -1,6 +1,5 @@
 package components.backend;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -20,22 +19,22 @@ public class Administrator extends UserRole implements Serializable {
 
         // Get List of members from the file
         List<Member> members;
-        try {
-            members = DataAccess.getMembersList();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
+//        try {
+//            members = DataAccess.getMembersList();
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//            return;
+//        }
 
         // Add the new member to the list
-        members.add(newMember);
+       // members.add(newMember);
 
         // save updated members list to the file
-        try {
-            DataAccess.saveMembersList(members);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+////            DataAccess.saveMembersList(members);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         System.out.println("New member added successfully!");
     }
 
@@ -44,38 +43,38 @@ public class Administrator extends UserRole implements Serializable {
                              int numCopies) {
 
         // Create a new Author
-        Author Author1 = new Author("this is a bio for author 1");
-
-        // Add Author to Author list
-        authors.add(Author1);
-
-        // Create a new Book
-        Book book = new Book(isbn,title,maxCheckoutLen ,authors,numCopies);
+//        Author Author1 = new Author("this is a bio for author 1");
+//
+//        // Add Author to Author list
+//        authors.add(Author1);
+//
+//        // Create a new Book
+//        Book book = new Book(isbn,title,maxCheckoutLen ,authors,numCopies);
 
         // save new book  to the file
-        try {
-            DataAccess.saveBook(book);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            DataAccess.saveBook(book);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
         System.out.println("New Book added successfully!");
     }
 
     public void getMembers() {
-        // Deserialize existing members
-        List<Member> members;
-        try {
-            members = DataAccess.getMembersList();
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-            return;
-        }
-
-        // Display the list of members
-        System.out.println("List of Members:");
-        for (Member member : members) {
-            System.out.println(member.getMemberId());
-        }
+//        // Deserialize existing members
+//        List<Member> members;
+//        try {
+//            members = DataAccess.getMembersList();
+//        } catch (IOException | ClassNotFoundException e) {
+//            e.printStackTrace();
+//            return;
+//        }
+//
+//        // Display the list of members
+//        System.out.println("List of Members:");
+//        for (Member member : members) {
+//            System.out.println(member.getMemberId());
+//        }
     }
 
     public void editMember() {
