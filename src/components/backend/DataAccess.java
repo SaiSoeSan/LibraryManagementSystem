@@ -48,6 +48,10 @@ public class DataAccess {
     public static List<Member> getMembersList() {
         return new ArrayList<>(memberMap.values());
     }
+    // Get book list
+    public static List<Book> getBooksList() {
+        return new ArrayList<>(bookMap.values());
+    }
 
     // Read member from HashMap
     public static Member readMember(String memberId) {
