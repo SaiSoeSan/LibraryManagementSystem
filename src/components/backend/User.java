@@ -32,13 +32,7 @@ public class User extends Person implements Serializable {
     }
 
     public static Book searchBookByIsbn(String isbn) {
-        Book book = null;
-        try {
-            book = DataAccess.getBookByISBN(isbn);
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        return book;
+        return DataAccess.readBook(isbn);
     }
 
     public static User login(String id, String password) {
