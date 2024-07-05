@@ -1,6 +1,5 @@
 package components.backend;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,17 +35,9 @@ public class User extends Person implements Serializable {
     }
 
     public static User login(String id, String password) {
-        Map<String, User> userMap = null;
-        try {
-            userMap = (Map<String, User>) DataAccess.deserialize("users.ser");
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
-        if (userMap != null) {
-            User user = userMap.get(id);
-            if (user != null && user.verifyCredentials(id, password)) {
-                return user;
-            }
+        User user = DataAccess.readUser(id);
+        if (user != null && user.verifyCredentials(id, password)) {
+            return user;
         }
         return null;
     }
