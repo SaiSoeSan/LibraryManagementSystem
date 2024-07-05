@@ -13,6 +13,6 @@ public class CheckoutEntry {
     }
     @Override
     public String toString() {
-        return STR."CheckoutEntry{checkoutDate=\{checkoutDate}, dueDate=\{dueDate}, bookCopy=\{bookCopy}\{'}'}";
+        return "CheckoutEntry{checkoutDate= " + checkoutDate + ", dueDate= " + dueDate + ", bookCopy= " + bookCopy + "{'}'}";
     }
 }

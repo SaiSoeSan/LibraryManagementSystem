@@ -39,7 +39,7 @@ public class Administrator extends UserRole implements Serializable {
 
         //create author based on how many authors does the frontend pass me
         for (int i = 0; i < countOfAuthors; i++) {
-            Author author = new Author("Author" + i);
+            Author author = new Author("first name", "last name", "6412222", new Address("Street", "city", "state", "zip"), "bio");
             authors.add(author);
         }
 
@@ -53,7 +53,7 @@ public class Administrator extends UserRole implements Serializable {
         System.out.println("New Book added successfully!");
     }
 
-    public void addCopyOfBook(String isbn) {
+    public void addCopyOfBook(String isbn) throws IOException {
         Book book = User.searchBookByIsbn(isbn);
         book.createNewCopy();
         book.saveBook();
