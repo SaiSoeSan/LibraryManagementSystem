@@ -28,11 +28,17 @@ public class User extends Person implements Serializable {
     }
 
     public boolean verifyCredentials(String id, String password) {
-        System.out.println("passed from front end " + id);
-        System.out.println("passed from frontend " + password);
-        System.out.println("this" + this.password);
-        System.out.println("this " + this.id);
         return this.id.equals(id) && this.password.equals(password);
+    }
+
+    public static Book searchBookByIsbn(String isbn) {
+        Book book = null;
+        try {
+            book = DataAccess.getBookByISBN(isbn);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return book;
     }
 
     public static User login(String id, String password) {
@@ -47,7 +53,6 @@ public class User extends Person implements Serializable {
             if (user != null && user.verifyCredentials(id, password)) {
                 return user;
             }
-
         }
         return null;
     }
