@@ -61,8 +61,7 @@ public class TestData {
 		
 		DataAccessFacade.loadMemberMap(members);	
 	}
-	
-	///////////// DATA //////////////
+
 	List<LibraryMember> members = new ArrayList<LibraryMember>();
 	@SuppressWarnings("serial")
 	
@@ -98,8 +97,7 @@ public class TestData {
 			add(new Book("48-56882", "Jimmy's First Day of School", 7, Arrays.asList(allAuthors.get(4))));		
 		}
 	};
-	
-	@SuppressWarnings("serial")
+
 	List<User> allUsers = new ArrayList<User>() {
 		{
 			add(new User("101", "xyz", Auth.LIBRARIAN));

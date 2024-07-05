@@ -1,22 +1,18 @@
 package librarysystem.window.usecase;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.*;
-
 import business.LibraryStaff;
-import business.LibraryMember;
-import business.Address;
 import librarysystem.StaffWindow;
 import librarysystem.Util;
 import librarysystem.window.AdminWindow;
 
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 public class AddMemberWindow extends JFrame implements StaffWindow {
     public static final AddMemberWindow INSTANCE = new AddMemberWindow();
     private boolean isInitialized = false;
-
 
     private LibraryStaff libraryStaff;
 
@@ -32,9 +28,7 @@ public class AddMemberWindow extends JFrame implements StaffWindow {
     private AddMemberWindow() {}
 
     @Override
-    public void init() {
-
-    }
+    public void init() {}
 
     public boolean isInitialized() {
         return isInitialized;
@@ -47,33 +41,30 @@ public class AddMemberWindow extends JFrame implements StaffWindow {
     public void init(LibraryStaff libraryStaff) {
         this.libraryStaff = libraryStaff;
         JPanel mainPanel = new JPanel(new BorderLayout());
-        JPanel formPanel = new JPanel(new FlowLayout());
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
 
-        memberIdField = new JTextField(10);
-        firstNameField = new JTextField(10);
-        lastNameField = new JTextField(10);
-        streetField = new JTextField(10);
-        cityField = new JTextField(10);
-        stateField = new JTextField(10);
-        zipField = new JTextField(10);
-        phoneField = new JTextField(10);
+        memberIdField = new JTextField(20);
+        firstNameField = new JTextField(20);
+        lastNameField = new JTextField(20);
+        streetField = new JTextField(20);
+        cityField = new JTextField(20);
+        stateField = new JTextField(20);
+        zipField = new JTextField(20);
+        phoneField = new JTextField(20);
 
-        formPanel.add(new JLabel("Member ID"));
-        formPanel.add(memberIdField);
-        formPanel.add(new JLabel("First Name"));
-        formPanel.add(firstNameField);
-        formPanel.add(new JLabel("Last Name"));
-        formPanel.add(lastNameField);
-        formPanel.add(new JLabel("Street"));
-        formPanel.add(streetField);
-        formPanel.add(new JLabel("City"));
-        formPanel.add(cityField);
-        formPanel.add(new JLabel("State"));
-        formPanel.add(stateField);
-        formPanel.add(new JLabel("Zip"));
-        formPanel.add(zipField);
-        formPanel.add(new JLabel("Phone"));
-        formPanel.add(phoneField);
+        addFormRow(formPanel, gbc, "Member ID", memberIdField);
+        addFormRow(formPanel, gbc, "First Name", firstNameField);
+        addFormRow(formPanel, gbc, "Last Name", lastNameField);
+        addFormRow(formPanel, gbc, "Street", streetField);
+        addFormRow(formPanel, gbc, "City", cityField);
+        addFormRow(formPanel, gbc, "State", stateField);
+        addFormRow(formPanel, gbc, "Zip", zipField);
+        addFormRow(formPanel, gbc, "Phone", phoneField);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton submitButton = new JButton("Submit");
@@ -91,7 +82,17 @@ public class AddMemberWindow extends JFrame implements StaffWindow {
         getContentPane().add(mainPanel);
         isInitialized(true);
         pack();
-        setSize(500, 300);
+        setSize(800, 600);  // Increased window size
+        setLocationRelativeTo(null);  // Center the window on the screen
+    }
+
+    private void addFormRow(JPanel panel, GridBagConstraints gbc, String label, JTextField textField) {
+        gbc.gridx = 0;
+        panel.add(new JLabel(label), gbc);
+        gbc.gridx = 1;
+        gbc.weightx = 1.0;
+        panel.add(textField, gbc);
+        gbc.gridy++;
     }
 
     class SubmitButtonListener implements ActionListener {
@@ -105,19 +106,13 @@ public class AddMemberWindow extends JFrame implements StaffWindow {
             String zip = zipField.getText();
             String phone = phoneField.getText();
 
-            Address address = new Address(street, city, state, zip);
-            LibraryMember member = new LibraryMember(memberId, firstName, lastName, phone, address);
-
-
             try {
-               String response = libraryStaff.addNewLibraryMember(member);
+                String response = libraryStaff.addNewLibraryMember(memberId, firstName, lastName, phone, street, city, state, zip);
                 clearFields();
                 JOptionPane.showMessageDialog(AddMemberWindow.this, "New Member Added Successfully " + response);
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(AddMemberWindow.this, "Error: " + e.getMessage());
             }
-
-
 
             clearFields();
         }
@@ -142,4 +137,3 @@ public class AddMemberWindow extends JFrame implements StaffWindow {
         phoneField.setText("");
     }
 }
-

@@ -4,7 +4,7 @@ public class administrator extends LibraryStaff {
 
 
     @Override
-    public String addNewLibraryMember(LibraryMember libraryMember) {
+    public String addNewLibraryMember(String memberId,String firstName, String lastName, String phone, String street, String city, String state, String zip) {
         return "addNewLibraryMember by Admin Library Member";
     }
 
@@ -20,8 +20,8 @@ public class administrator extends LibraryStaff {
     }
 
     @Override
-    public String checkOutBook(String memberId, String isbn) {
-        return "CheckOutBook by Admin Library Member";
+    public CheckOutRecord checkOutBook(String memberId, String isbn) {
+        return null;
     }
 
     @Override

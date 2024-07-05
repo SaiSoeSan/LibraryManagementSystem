@@ -1,15 +1,17 @@
 package librarysystem.window.usecase;
 
-
+import business.CheckOutRecord;
 import business.LibraryStaff;
 import librarysystem.StaffWindow;
 import librarysystem.Util;
 import librarysystem.window.LibrarianWindow;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
     public static final PrintCheckoutRecordWindow INSTANCE = new PrintCheckoutRecordWindow();
@@ -68,7 +70,7 @@ public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
         getContentPane().add(mainPanel);
         isInitialized(true);
         pack();
-        setSize(400, 200);
+        setSize(600, 400);
     }
 
     class PrintButtonListener implements ActionListener {
@@ -81,23 +83,55 @@ public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
         public void actionPerformed(ActionEvent evt) {
             String memberId = memberIdField.getText();
 
-            // Perform printing logic here
-//            String checkoutRecord = LibrarySystem.INSTANCE.printCheckoutRecord(memberId);
-            String checkoutRecord = libraryStaff.PrintMemberCheckOutRecord(memberId); // TODO
-//            String checkoutRecord = "success"; // TODO
+            try {
+//                List<CheckOutRecord> checkoutRecords = libraryStaff.PrintMemberCheckOutRecord(memberId);
 
-            if (checkoutRecord != null) {
-                JTextArea textArea = new JTextArea(checkoutRecord);
-                textArea.setEditable(false);
-                JScrollPane scrollPane = new JScrollPane(textArea);
-                scrollPane.setPreferredSize(new Dimension(400, 300));
-                JOptionPane.showMessageDialog(PrintCheckoutRecordWindow.this, scrollPane, "Checkout Record", JOptionPane.INFORMATION_MESSAGE);
-                memberIdField.setText("");
-            } else {
-                JOptionPane.showMessageDialog(PrintCheckoutRecordWindow.this, "Member not found or no checkout record.");
+                // TODO
+                List<CheckOutRecord> checkoutRecords = List.of(new CheckOutRecord());
+
+                if (!checkoutRecords.isEmpty()) {
+                    displayCheckoutRecords(checkoutRecords);
+                    memberIdField.setText("");
+                } else {
+                    JOptionPane.showMessageDialog(PrintCheckoutRecordWindow.this, "Member not found or no checkout record.");
+                }
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(PrintCheckoutRecordWindow.this, "Error: " + e.getMessage());
             }
         }
+
+
+        private void displayCheckoutRecords(List<CheckOutRecord> records) {
+            String[] columnNames = {"ISBN", "Title", "Copy Number", "Checkout Date", "Due Date"};
+            DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
+                @Override
+                public boolean isCellEditable(int row, int column) {
+                    return false; // All cells are read-only
+                }
+            };
+
+            for (CheckOutRecord record : records) {
+                Object[] rowData = {
+                        "record.getBookCopy().getBook().getIsbn()",
+                        "record.getBookCopy().getBook().getTitle()",
+                        "record.getBookCopy().getCopyNum()",
+                        "record.getCheckoutDate()",
+                        "record.getDueDate()"
+                };
+                tableModel.addRow(rowData);
+            }
+
+            JTable checkoutTable = new JTable(tableModel);
+            checkoutTable.setFillsViewportHeight(true);
+
+            JScrollPane scrollPane = new JScrollPane(checkoutTable);
+            scrollPane.setPreferredSize(new Dimension(600, 300));
+
+            JOptionPane.showMessageDialog(PrintCheckoutRecordWindow.this, scrollPane, "Checkout Record", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
+
+
 
     class BackButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
@@ -106,4 +140,3 @@ public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
         }
     }
 }
-

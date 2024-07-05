@@ -16,7 +16,6 @@ public class AddBookCopyWindow extends JFrame implements StaffWindow {
 
     private LibraryStaff libraryStaff;
 
-
     private JTextField isbnField;
     private JTextField numCopiesField;
 
@@ -38,15 +37,37 @@ public class AddBookCopyWindow extends JFrame implements StaffWindow {
     public void init(LibraryStaff libraryStaff) {
         this.libraryStaff = libraryStaff;
         JPanel mainPanel = new JPanel(new BorderLayout());
-        JPanel formPanel = new JPanel(new FlowLayout());
 
-        isbnField = new JTextField(10);
-        numCopiesField = new JTextField(10);
+        // Using GridBagLayout for formPanel to center and justify fields
+        JPanel formPanel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(10, 10, 10, 10);
+        gbc.fill = GridBagConstraints.HORIZONTAL;
 
-        formPanel.add(new JLabel("ISBN"));
-        formPanel.add(isbnField);
-        formPanel.add(new JLabel("Number of Copies"));
-        formPanel.add(numCopiesField);
+        isbnField = new JTextField(20);
+        numCopiesField = new JTextField(20);
+
+        // ISBN Label and Field
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
+        formPanel.add(new JLabel("ISBN: "), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.WEST;
+        formPanel.add(isbnField, gbc);
+
+        // Number of Copies Label and Field
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.EAST;
+        formPanel.add(new JLabel("Number of Copies: "), gbc);
+
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        gbc.anchor = GridBagConstraints.WEST;
+        formPanel.add(numCopiesField, gbc);
 
         JPanel buttonPanel = new JPanel(new FlowLayout());
         JButton submitButton = new JButton("Submit");
@@ -64,7 +85,8 @@ public class AddBookCopyWindow extends JFrame implements StaffWindow {
         getContentPane().add(mainPanel);
         isInitialized(true);
         pack();
-        setSize(400, 200);
+        setSize(800, 400); // Increased screen size
+        Util.centerFrameOnDesktop(this);
     }
 
     class SubmitButtonListener implements ActionListener {

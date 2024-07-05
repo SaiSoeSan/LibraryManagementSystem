@@ -1,24 +1,19 @@
 package librarysystem.window;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-
 import business.AbstractServiceFactory;
 import business.LibraryStaff;
+import librarysystem.LibWindow;
+import librarysystem.LibrarySystem;
+import librarysystem.Util;
 import librarysystem.window.usecase.AddBookCopyWindow;
 import librarysystem.window.usecase.AddBookWindow;
 import librarysystem.window.usecase.AddMemberWindow;
-import librarysystem.LibWindow;
-import librarysystem.LibrarySystem;
 import librarysystem.window.usecase.SearchBookWindow;
-import librarysystem.Util;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AdminWindow extends JFrame implements LibWindow {
     public static final AdminWindow INSTANCE = new AdminWindow();
@@ -148,6 +143,7 @@ public class AdminWindow extends JFrame implements LibWindow {
         public void actionPerformed(ActionEvent evt) {
             AddBookCopyWindow.INSTANCE.init(libraryStaff);
             AddBookCopyWindow.INSTANCE.setVisible(true);
+//            AddBookCopyWindow.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             AdminWindow.INSTANCE.setVisible(false);
             Util.centerFrameOnDesktop(AddBookCopyWindow.INSTANCE);
 
