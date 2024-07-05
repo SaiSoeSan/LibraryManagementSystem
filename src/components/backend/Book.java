@@ -1,5 +1,6 @@
 package components.backend;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +27,16 @@ public class Book implements Serializable {
 
     public String getIsbn() {
         return isbn;
+    }
+
+    public BookCopy getBookCopy() {
+        if(!bookCopyList.isEmpty()) {
+            return bookCopyList.getFirst();
+        }
+        else return null;
+    }
+    public void saveBook() throws IOException {
+        DataAccess.saveBook(this);;
     }
 
 //    public boolean isAvailable() {
