@@ -13,10 +13,12 @@ public class DataAccess {
 
     private static HashMap<String, Member> memberMap;
     private static HashMap<String, Book> bookMap;
+    private static HashMap<String, User> userMap;
 
     static {
         memberMap = readHashMapFromFile(MEMBER_FILE_PATH);
         bookMap = readHashMapFromFile(BOOK_FILE_PATH);
+        userMap = readHashMapFromFile(USER_FILE_PATH);
     }
 
     // Deserialize to an object from the specified file
@@ -68,7 +70,13 @@ public class DataAccess {
         bookMap.put(book.getIsbn(), book);
         serializeHashMap(bookMap, BOOK_FILE_PATH);
     }
-
+    public static void saveUser(User user) throws IOException {
+        userMap.put(user.getId(), user);
+        serializeHashMap(userMap, USER_FILE_PATH);
+    }
+    public static User readUser(String id) {
+        return userMap.get(id);
+    }
     // Serialize HashMap to file
     private static <T> void serializeHashMap(HashMap<String, T> map, String filePath) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filePath))) {

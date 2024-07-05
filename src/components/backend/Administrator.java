@@ -1,6 +1,8 @@
 package components.backend;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Administrator extends UserRole implements Serializable {
@@ -11,56 +13,55 @@ public class Administrator extends UserRole implements Serializable {
     }
 
     public void addNewMember(String memberId, String firstName, String lastName, String street,
-                          String city, String state, String zip, String phoneNumber) {
-        // Create Address object
-        Address address = new Address(street, city, state, zip);
-        // Create a new Member
-        Member newMember = new Member(firstName, lastName, phoneNumber,address,memberId);
-
-        // Get List of members from the file
-        List<Member> members;
-//        try {
-//            members = DataAccess.getMembersList();
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//            return;
-//        }
-
-        // Add the new member to the list
-       // members.add(newMember);
+                             String city, String state, String zip, String phoneNumber) {
 
         // save updated members list to the file
-//        try {
-////            DataAccess.saveMembersList(members);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            Address address = new Address(street, city, state, zip);
+
+            DataAccess.saveMember(new Member(firstName, lastName, phoneNumber, address, memberId));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         System.out.println("New member added successfully!");
+
+
     }
 
 
-    public void addBook(String isbn, String title, List<Author> authors, int maxCheckoutLen,
-                             int numCopies) {
+    public void addNewBook(String isbn, String title, int countOfAuthors, int maxCheckoutLength,
+                           int numberOfCopies) {
 
-        // Create a new Author
-//        Author Author1 = new Author("this is a bio for author 1");
-//
-//        // Add Author to Author list
-//        authors.add(Author1);
-//
-//        // Create a new Book
-//        Book book = new Book(isbn,title,maxCheckoutLen ,authors,numCopies);
+        System.out.println("adding book....");
 
-        // save new book  to the file
-//        try {
-//            DataAccess.saveBook(book);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
+        List<Author> authors = new ArrayList<>();
+
+        //create author based on how many authors does the frontend pass me
+        for (int i = 0; i < countOfAuthors; i++) {
+            Author author = new Author("first name", "last name", "6412222", new Address("Street", "city", "state", "zip"), "bio");
+            authors.add(author);
+        }
+
+        try {
+            Book book = new Book(isbn, title, maxCheckoutLength, authors, numberOfCopies);
+            DataAccess.saveBook(book);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         System.out.println("New Book added successfully!");
     }
 
-    public void getMembers() {
+    public void addCopyOfBook(String isbn) throws IOException {
+        Book book = User.searchBookByIsbn(isbn);
+        book.createNewCopy();
+        book.saveBook();
+        System.out.println("New copy book added successfully!");
+
+    }
+
+//    public void getMembers() {
 //        // Deserialize existing members
 //        List<Member> members;
 //        try {
@@ -75,7 +76,7 @@ public class Administrator extends UserRole implements Serializable {
 //        for (Member member : members) {
 //            System.out.println(member.getMemberId());
 //        }
-    }
+//    }
 
     public void editMember() {
         System.out.println("Editing a member.");

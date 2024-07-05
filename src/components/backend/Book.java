@@ -38,7 +38,10 @@ public class Book implements Serializable {
     public void saveBook() throws IOException {
         DataAccess.saveBook(this);;
     }
-
+    public void createNewCopy() {
+        String uniqueNumber = BookCopy.generateRandomString(5);
+        bookCopyList.add(new BookCopy(uniqueNumber, true));
+    }
 //    public boolean isAvailable() {
 //        return availability;
 //    }

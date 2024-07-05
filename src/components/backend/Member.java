@@ -22,6 +22,13 @@ public class Member extends Person implements Serializable {
         this.checkoutEntries = new ArrayList<CheckoutEntry>();
     }
 
+    @Override
+    public String toString() {
+        return "Member{" +
+                "memberId='" + memberId + '\'' +
+                '}';
+    }
+
     public String getMemberId() {
         return memberId;
     }
