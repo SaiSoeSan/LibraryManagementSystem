@@ -2,7 +2,7 @@ package business;
 
 import java.io.Serializable;
 
-/* Immutable */
+
 final public class Address implements Serializable {
 	
 	private static final long serialVersionUID = -891229800414574888L;
@@ -29,6 +29,8 @@ final public class Address implements Serializable {
 	public String getZip() {
 		return zip;
 	}
+
+
 	@Override
 	public String toString() {
 		return "(" + street + ", " + city + ", " + zip + ")";

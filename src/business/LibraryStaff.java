@@ -5,11 +5,15 @@ import dataaccess.DataAccess;
 import dataaccess.DataAccessFacade;
 import dataaccess.User;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public abstract class LibraryStaff {
 
     public static Auth currentAuth = null;
+
+
 
 
     public static Auth login(String id, String password) throws LoginException {
@@ -28,12 +32,27 @@ public abstract class LibraryStaff {
     }
 
 
+	public static List<String> allMemberIds() {
+		DataAccess da = new DataAccessFacade();
+		ArrayList<String> retval = new ArrayList<>();
+		retval.addAll(da.readMemberMap().keySet());
+		return retval;
+	}
+
+	public static List<String> allBookIds() {
+		DataAccess da = new DataAccessFacade();
+		ArrayList<String> retval = new ArrayList<>();
+		retval.addAll(da.readBooksMap().keySet());
+		return retval;
+	}
+
+
     public String searchBookByIsbn(String isbn) {
         return "General way of searching for a book";
     }
 
 
-    public abstract String addNewLibraryMember(LibraryMember libraryMember);
+    public abstract String addNewLibraryMember(String memberId,String firstName, String lastName, String phone, String street, String city, String state, String zip);
 
 //    public abstract String editLibraryMemberInfo();
 
@@ -43,7 +62,7 @@ public abstract class LibraryStaff {
 
 
 
-    public abstract String checkOutBook(String memberId, String isbn);
+    public abstract CheckOutRecord checkOutBook(String memberId, String isbn);
 
 
     public abstract boolean checkIfBookExist();

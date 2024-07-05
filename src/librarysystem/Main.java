@@ -1,6 +1,7 @@
 package librarysystem;
 
-import javax.swing.*;
+import librarysystem.window.usecase.LoginWindow;
+
 import java.awt.*;
 
 
@@ -10,14 +11,16 @@ public class Main {
 	public static void main(String[] args) {
 	      EventQueue.invokeLater(() -> 
 	         {
-	            LibrarySystem.INSTANCE.setTitle("Sample Library Application");
-	            LibrarySystem.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	            
-	            LibrarySystem.INSTANCE.init();
-	            centerFrameOnDesktop(LibrarySystem.INSTANCE);
-	            LibrarySystem.INSTANCE.setVisible(true);
+	            LoginWindow.INSTANCE.setTitle("Sample Library Application");
+//				 LoginWindow.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+				 LoginWindow.INSTANCE.init();
+//	            centerFrameOnDesktop(LoginWindow.INSTANCE);
+				 LoginWindow.INSTANCE.setVisible(true);
+				 Util.centerFrameOnDesktop(LoginWindow.INSTANCE);
 	         });
 	   }
+
 	   
 	   public static void centerFrameOnDesktop(Component f) {
 			Toolkit toolkit = Toolkit.getDefaultToolkit();

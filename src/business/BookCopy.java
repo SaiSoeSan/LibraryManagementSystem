@@ -16,6 +16,10 @@ final public class BookCopy implements Serializable {
 		this.copyNum = copyNum;
 		this.isAvailable = isAvailable;
 	}
+
+	public BookCopy(){
+
+	}
 	
 	BookCopy(Book book, int copyNum) {
 		this.book = book;

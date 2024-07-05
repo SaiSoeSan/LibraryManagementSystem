@@ -1,12 +1,11 @@
 package librarysystem.window.usecase;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.*;
-
 import business.LibraryStaff;
 import librarysystem.StaffWindow;
 import librarysystem.window.AdminWindow;
+
+import javax.swing.*;
+import java.awt.*;
 
 public class SearchBookWindow extends JFrame implements StaffWindow {
     public static final SearchBookWindow INSTANCE = new SearchBookWindow();

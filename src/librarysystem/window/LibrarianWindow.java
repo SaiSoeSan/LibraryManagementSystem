@@ -3,21 +3,18 @@ package librarysystem.window;
 
 import business.AbstractServiceFactory;
 import business.LibraryStaff;
-import librarysystem.window.usecase.CheckoutBookWindow;
 import librarysystem.LibWindow;
 import librarysystem.LibrarySystem;
-import librarysystem.window.usecase.PrintCheckoutRecordWindow;
 import librarysystem.Util;
+import librarysystem.window.usecase.CheckoutBookWindow;
+import librarysystem.window.usecase.PrintCheckoutRecordWindow;
+import librarysystem.window.usecase.SearchDueBookWindow;
 import librarysystem.window.usecase.SearchMemberWindow;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class LibrarianWindow extends JFrame implements LibWindow {
     public static final LibrarianWindow INSTANCE = new LibrarianWindow();
@@ -48,15 +45,19 @@ public class LibrarianWindow extends JFrame implements LibWindow {
         JButton checkoutBookButton = new JButton("Checkout Book");
         JButton printCheckoutRecordButton = new JButton("Print Checkout Record");
         JButton searchMemberButton = new JButton("Search Member");
+        JButton searchBookButton = new JButton("Search Book By ISBN");
         JButton backButton = new JButton("Back to Main");
 
         checkoutBookButton.addActionListener(new CheckoutBookButtonListener());
         printCheckoutRecordButton.addActionListener(new PrintCheckoutRecordButtonListener());
         searchMemberButton.addActionListener(new SearchMemberButtonListener());
+        searchBookButton.addActionListener(new SearchBookButtonListener());
         backButton.addActionListener(new BackButtonListener());
 
         buttonPanel.add(checkoutBookButton);
         buttonPanel.add(printCheckoutRecordButton);
+        buttonPanel.add(searchMemberButton);
+        buttonPanel.add(searchBookButton);
         buttonPanel.add(backButton);
 
         mainPanel.add(labelPanel, BorderLayout.NORTH);
@@ -70,25 +71,38 @@ public class LibrarianWindow extends JFrame implements LibWindow {
 
     class CheckoutBookButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            CheckoutBookWindow.INSTANCE.init();
+            CheckoutBookWindow.INSTANCE.init(libraryStaff);
             CheckoutBookWindow.INSTANCE.setVisible(true);
+//            CheckoutBookWindow.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             LibrarianWindow.INSTANCE.setVisible(false);
+            Util.centerFrameOnDesktop(CheckoutBookWindow.INSTANCE);
         }
     }
 
+
+
     class PrintCheckoutRecordButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            PrintCheckoutRecordWindow.INSTANCE.init();
+            PrintCheckoutRecordWindow.INSTANCE.init(libraryStaff);
             PrintCheckoutRecordWindow.INSTANCE.setVisible(true);
             LibrarianWindow.INSTANCE.setVisible(false);
+            Util.centerFrameOnDesktop(PrintCheckoutRecordWindow.INSTANCE);
         }
     }
 
 
     class SearchMemberButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            SearchMemberWindow.INSTANCE.init();
+            SearchMemberWindow.INSTANCE.init(libraryStaff);
             SearchMemberWindow.INSTANCE.setVisible(true);
+            LibrarianWindow.INSTANCE.setVisible(false);
+        }
+    }
+
+    class SearchBookButtonListener implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            SearchDueBookWindow.INSTANCE.init(libraryStaff);
+            SearchDueBookWindow.INSTANCE.setVisible(true);
             LibrarianWindow.INSTANCE.setVisible(false);
         }
     }

@@ -4,7 +4,7 @@ public class Librarian extends LibraryStaff {
 
 
     @Override
-    public String addNewLibraryMember(LibraryMember libraryMember) {
+    public String addNewLibraryMember(String memberId,String firstName, String lastName, String phone, String street, String city, String state, String zip) {
         return "Librarian dont do this action";
     }
 
@@ -20,8 +20,8 @@ public class Librarian extends LibraryStaff {
     }
 
     @Override
-    public String checkOutBook(String memberId, String isbn) {
-        return "checkout book by library";
+    public CheckOutRecord checkOutBook(String memberId, String isbn) {
+        return null;
     }
 
     @Override

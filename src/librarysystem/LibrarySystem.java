@@ -3,12 +3,16 @@ package librarysystem;
 import librarysystem.window.usecase.AllMemberIdsWindow;
 import librarysystem.window.usecase.LoginWindow;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
 
-import javax.swing.*;
+import static business.LibraryStaff.allBookIds;
+import static business.LibraryStaff.allMemberIds;
 
 
 public class LibrarySystem extends JFrame implements LibWindow {
@@ -16,7 +20,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
     JPanel mainPanel;
     JMenuBar menuBar;
     JMenu options;
-    JMenuItem login, allBookIds, allMemberIds;
+//    JMenuItem login, allBookIds, allMemberIds;
     String pathToImage;
     JLayeredPane layeredPane = new JLayeredPane();
     private boolean isInitialized = false;
@@ -39,7 +43,7 @@ public class LibrarySystem extends JFrame implements LibWindow {
 
     public void init() {
         formatContentPane();
-        setPathToImage();
+//        setPathToImage();
         insertSplashImage();
         createMenus();
         //pack();
@@ -110,8 +114,8 @@ public class LibrarySystem extends JFrame implements LibWindow {
         add(mainPanel);
 
         loginMenuButton.addActionListener(new LoginListener());
-//        allBookIdsButton.addActionListener(new AllBookIdsListener());
-//        allMemberIdsButton.addActionListener(new AllMemberIdsListener());
+        allBookIdsButton.addActionListener(new AllBookIdsListener());
+        allMemberIdsButton.addActionListener(new AllMemberIdsListener());
     }
 
 
@@ -154,61 +158,63 @@ public class LibrarySystem extends JFrame implements LibWindow {
         }
 
     }
+//
+    class AllBookIdsListener implements ActionListener {
+//
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            LibrarySystem.hideAllWindows();
+            AllBookIdsWindow.INSTANCE.init();
 
-//    class AllBookIdsListener implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            LibrarySystem.hideAllWindows();
-//            AllBookIdsWindow.INSTANCE.init();
-//
-//            List<String> ids = ci.allBookIds();
-//            Collections.sort(ids);
-//            StringBuilder sb = new StringBuilder();
-//            for (String s : ids) {
-//                sb.append(s + "\n");
-//            }
-//            System.out.println(sb.toString());
-//            AllBookIdsWindow.INSTANCE.setData(sb.toString());
-//            AllBookIdsWindow.INSTANCE.pack();
-//            //AllBookIdsWindow.INSTANCE.setSize(660,500);
-//            Util.centerFrameOnDesktop(AllBookIdsWindow.INSTANCE);
-//            AllBookIdsWindow.INSTANCE.setVisible(true);
-//
-//        }
-//
-//    }
+            ArrayList<String> ids = (ArrayList<String>) allBookIds();
+            Collections.sort(ids);
+            StringBuilder sb = new StringBuilder();
+            for (String s : ids) {
+                sb.append(s + "\n");
+            }
+            System.out.println(sb.toString());
+            AllBookIdsWindow.INSTANCE.setData(sb.toString());
+            AllBookIdsWindow.INSTANCE.pack();
+            //AllBookIdsWindow.INSTANCE.setSize(660,500);
+            Util.centerFrameOnDesktop(AllBookIdsWindow.INSTANCE);
+            AllBookIdsWindow.INSTANCE.setVisible(true);
 
-//    class AllMemberIdsListener implements ActionListener {
-//
-//        @Override
-//        public void actionPerformed(ActionEvent e) {
-//            LibrarySystem.hideAllWindows();
-//            AllMemberIdsWindow.INSTANCE.init();
-//            AllMemberIdsWindow.INSTANCE.pack();
-//            AllMemberIdsWindow.INSTANCE.setVisible(true);
-//
-//
-//            LibrarySystem.hideAllWindows();
-//            AllBookIdsWindow.INSTANCE.init();
-//
-//            List<String> ids = ci.allMemberIds();
-//            Collections.sort(ids);
-//            StringBuilder sb = new StringBuilder();
-//            for (String s : ids) {
-//                sb.append(s + "\n");
-//            }
-//            System.out.println(sb.toString());
-//            AllMemberIdsWindow.INSTANCE.setData(sb.toString());
-//            AllMemberIdsWindow.INSTANCE.pack();
-//            //AllMemberIdsWindow.INSTANCE.setSize(660,500);
-//            Util.centerFrameOnDesktop(AllMemberIdsWindow.INSTANCE);
-//            AllMemberIdsWindow.INSTANCE.setVisible(true);
-//
-//
-//        }
-//
-//    }
+        }
+
+    }
+
+    class AllMemberIdsListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            LibrarySystem.hideAllWindows();
+            AllMemberIdsWindow.INSTANCE.init();
+            AllMemberIdsWindow.INSTANCE.pack();
+            AllMemberIdsWindow.INSTANCE.setVisible(true);
+
+
+            LibrarySystem.hideAllWindows();
+            AllBookIdsWindow.INSTANCE.init();
+
+            ArrayList<String> ids = (ArrayList<String>) allMemberIds();
+            Collections.sort(ids);
+            StringBuilder sb = new StringBuilder();
+            for (String s : ids) {
+                sb.append(s + "\n");
+            }
+            System.out.println(sb.toString());
+            AllMemberIdsWindow.INSTANCE.setData(sb.toString());
+            AllMemberIdsWindow.INSTANCE.pack();
+            //AllMemberIdsWindow.INSTANCE.setSize(660,500);
+            Util.centerFrameOnDesktop(AllMemberIdsWindow.INSTANCE);
+            AllMemberIdsWindow.INSTANCE.setVisible(true);
+
+
+        }
+
+    }
+
+
 
 
 
