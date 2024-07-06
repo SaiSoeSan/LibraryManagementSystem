@@ -39,7 +39,8 @@ public class Administrator extends UserRole implements Serializable {
 
         //create author based on how many authors does the frontend pass me
         for (int i = 0; i < countOfAuthors; i++) {
-            Author author = new Author("first name", "last name", "6412222", new Address("Street", "city", "state", "zip"), "bio");
+            Address address = new Address("Street", "city", "state", "zip");
+            Author author = new Author("first name", "last name", "6412222",address, "bio");
             authors.add(author);
         }
 
