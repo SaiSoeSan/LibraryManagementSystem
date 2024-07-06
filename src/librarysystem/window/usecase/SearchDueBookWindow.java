@@ -1,6 +1,7 @@
 package librarysystem.window.usecase;
 
-import business.BookCopy;
+import components.backend.Book;
+import components.backend.BookCopy;
 import components.backend.Librarian;
 import librarysystem.LibWindow;
 import librarysystem.window.AdminWindow;
@@ -15,7 +16,7 @@ public class SearchDueBookWindow extends JFrame implements LibWindow {
     private boolean isInitialized = false;
 
     private JTextField isbnField;
-    private Librarian Liberian;
+    private Librarian liberian;
     private JTable resultTable;
     private DefaultTableModel tableModel;
 
@@ -34,7 +35,7 @@ public class SearchDueBookWindow extends JFrame implements LibWindow {
     }
 
     public void init(Librarian librarian) {
-        this.Liberian = librarian;
+        this.liberian = librarian;
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel formPanel = new JPanel(new FlowLayout());
 
@@ -80,27 +81,27 @@ public class SearchDueBookWindow extends JFrame implements LibWindow {
     private void searchBookCopies() {
         String isbn = isbnField.getText();
         try {
-            //TODO
-//            ArrayList<BookCopy> bookCopies = libraryStaff.searchBookByIsbn(isbn);
-            List<BookCopy> bookCopies = List.of(new BookCopy()); // Replace with actual search logic
-            displayBookCopies(bookCopies);
+
+            Book book = liberian.searchBookByISBN(isbn);
+            List<BookCopy> bookCopies = book.getBookCopyList(); // Replace with actual search logic
+            displayBookCopies(bookCopies, book);
         } catch (Exception e) {
             JOptionPane.showMessageDialog(SearchDueBookWindow.this, "Error: " + e.getMessage());
         }
     }
 
-    private void displayBookCopies(List<BookCopy> bookCopies) {
+    private void displayBookCopies(List<BookCopy> bookCopies, Book book) {
         tableModel.setRowCount(0); // Clear existing data
 
         if (bookCopies != null && !bookCopies.isEmpty()) {
             for (BookCopy copy : bookCopies) {
                 String checkedOutBy = "";
                 String dueDate = "";
-
+// TODO
                 tableModel.addRow(new Object[]{
-                        "copy.getBook().getIsbn()",
-                        "copy.getBook().getTitle()",
-                        "copy.getCopyNum()",
+                        book.getIsbn(),
+                        book.getTitle(),
+                       copy.getUniqueNumber(),
                         "checkedOutBy",
                         "dueDate"
                 });

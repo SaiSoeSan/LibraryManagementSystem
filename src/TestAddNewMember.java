@@ -29,9 +29,9 @@ public class TestAddNewMember {
         User superAdmin = new User("superAdmin", "superPass", "Samar", "Samar", "123-456-7890", address);
 
         // Create roles and assign to users
-        BothAdmin superAdminRole = new BothAdmin(superAdmin);
 
-        superAdmin.addRole("Both", superAdminRole);
+        superAdmin.addRole("Librarian", librarianRole);
+        superAdmin.addRole("Administrator", adminRole);
 
 
 

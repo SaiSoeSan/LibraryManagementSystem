@@ -7,10 +7,12 @@ public class Author extends Person implements Serializable {
 
 
     private String bio;
+    private String credentials;
 
-    public Author(String firstName, String lastName, String phoneNumber, Address address, String bio) {
+    public Author(String firstName, String lastName, String phoneNumber, Address address, String bio, String credentials ) {
         super(firstName, lastName, phoneNumber, address);
         this.bio = bio;
+        this.credentials = credentials;
     }
 
     public String getBio() {

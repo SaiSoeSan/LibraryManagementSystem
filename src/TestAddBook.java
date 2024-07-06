@@ -4,6 +4,7 @@ import components.backend.DataAccess;
 import components.backend.User;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class TestAddBook {
     public static void main(String[] args) {
@@ -38,7 +39,7 @@ public class TestAddBook {
                 int countOfAuthors = 2;
                 int numberOfCopies = 2;
 
-                administrator.addNewBook(isnb,title,countOfAuthors,maxCheckoutLen,numberOfCopies);
+                administrator.addNewBook(isnb,title, new ArrayList<>(),maxCheckoutLen,numberOfCopies);
 
             } else {
                 System.out.println("Login failed.");

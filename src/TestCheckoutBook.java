@@ -16,7 +16,7 @@ public class TestCheckoutBook {
             Member member = new Member("Abdul", "Moiz", "641222222", address, "1");
             DataAccess.saveMember(member);
 
-            Author author = new Author("James", "Clear", "64199", address, "lets make a difference");
+            Author author = new Author("James", "Clear", "64199", address, "lets make a difference", "credential");
             List<Author> authors = new ArrayList<Author>();
             authors.add(author);
             Book book = new Book("1100452", "Atomic Habits", 10, authors, 5);

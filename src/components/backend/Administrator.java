@@ -2,7 +2,6 @@ package components.backend;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 public class Administrator extends UserRole implements Serializable {
@@ -35,18 +34,10 @@ public class Administrator extends UserRole implements Serializable {
     }
 
 
-    public void addNewBook(String isbn, String title, int countOfAuthors, int maxCheckoutLength,
+    public void addNewBook(String isbn, String title, List<Author> authors, int maxCheckoutLength,
                            int numberOfCopies) {
 
         System.out.println("adding book....");
-
-        List<Author> authors = new ArrayList<>();
-
-        //create author based on how many authors does the frontend pass me
-        for (int i = 0; i < countOfAuthors; i++) {
-            Author author = new Author("first name", "last name", "6412222", new Address("Street", "city", "state", "zip"), "bio");
-            authors.add(author);
-        }
 
         try {
             Book book = new Book(isbn, title, maxCheckoutLength, authors, numberOfCopies);

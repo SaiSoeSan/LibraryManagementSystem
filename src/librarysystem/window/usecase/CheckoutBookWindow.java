@@ -1,6 +1,6 @@
 package librarysystem.window.usecase;
 
-import business.CheckOutRecord;
+import components.backend.CheckoutEntry;
 import components.backend.Librarian;
 import librarysystem.LibWindow;
 import librarysystem.Util;
@@ -91,7 +91,7 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
         mainPanel.add(labelPanel, BorderLayout.NORTH);
         mainPanel.add(inputButtonPanel, BorderLayout.WEST); // Adjusted to WEST for justification
 
-        tableModel = new DefaultTableModel(new String[]{"ISBN", "Title", "Copy Number", "Checkout Date", "Due Date"}, 0) {
+        tableModel = new DefaultTableModel(new String[]{"Book Copy Number", "Checkout Date", "Due Date"}, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
@@ -122,7 +122,7 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
 
             try {
                 // CheckOutRecord response = libraryStaff.checkOutBook(memberId, isbn);
-                CheckOutRecord response = new CheckOutRecord();
+                CheckoutEntry response = librarian.checkOutBook(memberId, isbn);
                 if (response != null) {
                     updateCheckoutTable(response);
                     clearFields();
@@ -149,13 +149,11 @@ public class CheckoutBookWindow extends JFrame implements LibWindow {
         isbnField.setText("");
     }
 
-    private void updateCheckoutTable(CheckOutRecord entry) {
+    private void updateCheckoutTable(CheckoutEntry entry) {
         tableModel.addRow(new Object[]{
-                "Isbn",
-                "Title",
-                "entry.getBookCopy().getCopyNum()",
-                "entry.getCheckoutDate()",
-                "entry.getDueDate()"
+                entry.getBookCopy().getUniqueNumber(),
+                entry.getCheckoutDate(),
+                entry.getDueDate()
         });
     }
 }

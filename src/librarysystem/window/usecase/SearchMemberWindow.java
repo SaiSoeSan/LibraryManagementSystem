@@ -1,6 +1,7 @@
 package librarysystem.window.usecase;
 
 import components.backend.Librarian;
+import components.backend.Member;
 import librarysystem.LibWindow;
 import librarysystem.window.AdminWindow;
 
@@ -48,7 +49,7 @@ public class SearchMemberWindow extends JFrame implements LibWindow {
         searchButton.addActionListener(evt -> {
             String id = memberIdField.getText();
             // TODO
-            String response = librarian.getMemberById(id);
+            Member response = librarian.getMemberById(id);
             JOptionPane.showMessageDialog(SearchMemberWindow.this, "Member returned: " + response);
             // Add logic to search book by ISBN
         });

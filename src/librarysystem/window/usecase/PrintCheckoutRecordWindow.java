@@ -1,6 +1,6 @@
 package librarysystem.window.usecase;
 
-import business.CheckOutRecord;
+import components.backend.CheckoutEntry;
 import components.backend.Librarian;
 import librarysystem.LibWindow;
 import librarysystem.Util;
@@ -85,8 +85,7 @@ public class PrintCheckoutRecordWindow extends JFrame implements LibWindow {
             String memberId = memberIdField.getText();
 
             try {
-                // TODO
-                List<CheckOutRecord> checkoutRecords = librarian.PrintMemberCheckOutRecord(memberId);
+                List<CheckoutEntry> checkoutRecords = librarian.PrintMemberCheckOutRecord(memberId);
 
 
                 if (!checkoutRecords.isEmpty()) {
@@ -101,8 +100,8 @@ public class PrintCheckoutRecordWindow extends JFrame implements LibWindow {
         }
 
 
-        private void displayCheckoutRecords(List<CheckOutRecord> records) {
-            String[] columnNames = {"ISBN", "Title", "Copy Number", "Checkout Date", "Due Date"};
+        private void displayCheckoutRecords(List<CheckoutEntry> records) {
+            String[] columnNames = {"Book Copy Number", "Checkout Date", "Due Date"};
             DefaultTableModel tableModel = new DefaultTableModel(columnNames, 0) {
                 @Override
                 public boolean isCellEditable(int row, int column) {
@@ -110,13 +109,11 @@ public class PrintCheckoutRecordWindow extends JFrame implements LibWindow {
                 }
             };
 
-            for (CheckOutRecord record : records) {
+            for (CheckoutEntry record : records) {
                 Object[] rowData = {
-                        "record.getBookCopy().getBook().getIsbn()",
-                        "record.getBookCopy().getBook().getTitle()",
-                        "record.getBookCopy().getCopyNum()",
-                        "record.getCheckoutDate()",
-                        "record.getDueDate()"
+                        record.getBookCopy().getUniqueNumber(),
+                        record.getCheckoutDate(),
+                        record.getDueDate()
                 };
                 tableModel.addRow(rowData);
             }

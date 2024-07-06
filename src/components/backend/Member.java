@@ -33,7 +33,7 @@ public class Member extends Person implements Serializable, Comparable<Member> {
         return memberId;
     }
 
-    public static CheckoutEntry checkoutBook(String memberId, String ISBN) throws MemberNotFoundException, BookNotFoundException, IOException, ClassNotFoundException {
+    public static CheckoutEntry checkoutBook(String memberId, String ISBN) throws MemberNotFoundException, BookNotFoundException, IOException {
         Member member = DataAccess.readMember(memberId);
         if (member == null) {
             throw new MemberNotFoundException("Member not found."); // can throw exception here

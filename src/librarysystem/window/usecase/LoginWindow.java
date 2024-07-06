@@ -171,13 +171,12 @@ public class LoginWindow extends JFrame implements LibWindow {
 
 			System.out.println("About to login");
             User loggedInUser = User.login(userId, pass);
-//				auth = LibraryStaff.login(user, pass);
 
 
 			if (loggedInUser != null) {
 				System.out.println("Login successful!");
 
-				if (loggedInUser.getRole("Both") != null) {
+				if (loggedInUser.getRole("Librarian") != null && loggedInUser.getRole("Administrator") != null ) {
 					String[] options = {"Admin", "Librarian"};
 					int choice = JOptionPane.showOptionDialog(
 							this,
@@ -197,15 +196,12 @@ public class LoginWindow extends JFrame implements LibWindow {
 				if (loggedInUser.getRole("Librarian") != null) {
 					System.out.println("User is a Librarian");
 					showLibrarianWindow(loggedInUser);
-//					Librarian librarianRole = (Librarian) loggedInUser.getRole("Librarian");
 				}
 				if (loggedInUser.getRole("Administrator") != null) {
 					System.out.println("User is a Administrator");
 					showAdminWindow(loggedInUser);
-//					Administrator administrator = (Administrator) loggedInUser.getRole("Administrator");
 
 				}
-
 				else {
 					System.out.println("Login failed. Invalid Role");
 				}
