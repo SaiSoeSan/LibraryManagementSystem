@@ -1,6 +1,7 @@
 package components.backend;
 
-import java.io.IOException;
+import business.CheckOutRecord;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -23,4 +24,11 @@ public class Librarian extends UserRole implements Serializable {
         return "Librarian";
     }
 
+    public String getMemberById(String id) {
+        return null;
+    }
+
+    public List<CheckOutRecord> PrintMemberCheckOutRecord(String memberId) {
+    return null;
+    }
 }

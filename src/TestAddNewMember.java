@@ -14,8 +14,32 @@ public class TestAddNewMember {
 
         admin.addRole("Administrator", adminRole);
 
+
+
+        // Create users
+        User librarian = new User("lib1", "libPass", "John", "Wall", "123-456-7890", address);
+
+        // Create roles and assign to users
+        Librarian librarianRole = new Librarian(librarian);
+
+        librarian.addRole("Librarian", librarianRole);
+
+
+        // Create users
+        User superAdmin = new User("superAdmin", "superPass", "Samar", "Samar", "123-456-7890", address);
+
+        // Create roles and assign to users
+        BothAdmin superAdminRole = new BothAdmin(superAdmin);
+
+        superAdmin.addRole("Both", superAdminRole);
+
+
+
+
         try {
             DataAccess.saveUser(admin);
+            DataAccess.saveUser(librarian);
+            DataAccess.saveUser(superAdmin);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

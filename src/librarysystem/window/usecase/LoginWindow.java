@@ -1,8 +1,6 @@
 package librarysystem.window.usecase;
 
-import business.LibraryStaff;
-import business.LoginException;
-import dataaccess.Auth;
+import components.backend.User;
 import librarysystem.LibWindow;
 import librarysystem.LibrarySystem;
 import librarysystem.Util;
@@ -168,53 +166,63 @@ public class LoginWindow extends JFrame implements LibWindow {
 
 	private void addLoginButtonListener(JButton button) {
 		button.addActionListener(evt -> {
-			String user = username.getText();
+			String userId = username.getText();
 			String pass = new String(password.getPassword()); // Use getPassword() and convert to string
-			Auth auth = null;
-			try {
-				auth = LibraryStaff.login(user, pass);
-			} catch (LoginException e) {
-				JOptionPane.showMessageDialog(this, e.getMessage());
-				clearFields();
-				return;
-			}
 
-			if (auth != null) {
-				switch (auth) {
-					case BOTH -> {
-						String[] options = {"Admin", "Librarian"};
-						int choice = JOptionPane.showOptionDialog(
-								this,
-								"Welcome " + user + ". Choose role to view.",
-								"Role Selection",
-								JOptionPane.DEFAULT_OPTION,
-								JOptionPane.INFORMATION_MESSAGE,
-								null,
-								options,
-								options[0]
-						);
-						switch (choice) {
-							case 0 -> showAdminWindow();
-							case 1 -> showLibrarianWindow();
-						}
+			System.out.println("About to login");
+            User loggedInUser = User.login(userId, pass);
+//				auth = LibraryStaff.login(user, pass);
+
+
+			if (loggedInUser != null) {
+				System.out.println("Login successful!");
+
+				if (loggedInUser.getRole("Both") != null) {
+					String[] options = {"Admin", "Librarian"};
+					int choice = JOptionPane.showOptionDialog(
+							this,
+							"Welcome " + loggedInUser.getFirstName() + ". Choose role to view.",
+							"Role Selection",
+							JOptionPane.DEFAULT_OPTION,
+							JOptionPane.INFORMATION_MESSAGE,
+							null,
+							options,
+							options[0]
+					);
+					switch (choice) {
+						case 0 -> showAdminWindow(loggedInUser);
+						case 1 -> showLibrarianWindow(loggedInUser);
 					}
-					case ADMIN -> showAdminWindow();
-					case LIBRARIAN -> showLibrarianWindow();
+				}
+				if (loggedInUser.getRole("Librarian") != null) {
+					System.out.println("User is a Librarian");
+					showLibrarianWindow(loggedInUser);
+//					Librarian librarianRole = (Librarian) loggedInUser.getRole("Librarian");
+				}
+				if (loggedInUser.getRole("Administrator") != null) {
+					System.out.println("User is a Administrator");
+					showAdminWindow(loggedInUser);
+//					Administrator administrator = (Administrator) loggedInUser.getRole("Administrator");
+
+				}
+
+				else {
+					System.out.println("Login failed. Invalid Role");
 				}
 			}
 		});
 	}
 
-	private void showAdminWindow() {
+	private void showAdminWindow(User loggedInUser) {
 		LibrarySystem.hideAllWindows();
-		AdminWindow.INSTANCE.init();
+		AdminWindow.INSTANCE.init(loggedInUser);
 		Util.centerFrameOnDesktop(AdminWindow.INSTANCE);
 		AdminWindow.INSTANCE.setVisible(true);
 	}
 
-	private void showLibrarianWindow() {
+	private void showLibrarianWindow(User loggedInUser) {
 		LibrarySystem.hideAllWindows();
-		LibrarianWindow.INSTANCE.init();
+		LibrarianWindow.INSTANCE.init(loggedInUser);
 		Util.centerFrameOnDesktop(LibrarianWindow.INSTANCE);
 		LibrarianWindow.INSTANCE.setVisible(true);
 	}

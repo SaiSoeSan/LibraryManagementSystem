@@ -1,20 +1,20 @@
 package librarysystem.window.usecase;
 
-import business.LibraryStaff;
-import librarysystem.StaffWindow;
+import components.backend.Librarian;
+import librarysystem.LibWindow;
 import librarysystem.window.AdminWindow;
 
 import javax.swing.*;
 import java.awt.*;
 
-public class SearchMemberWindow extends JFrame implements StaffWindow {
+public class SearchMemberWindow extends JFrame implements LibWindow {
     public static final SearchMemberWindow INSTANCE = new SearchMemberWindow();
     private boolean isInitialized = false;
 
 
     private JTextField memberIdField;
 
-    private LibraryStaff libraryStaff;
+    private Librarian librarian;
 
     private SearchMemberWindow() {}
 
@@ -31,8 +31,8 @@ public class SearchMemberWindow extends JFrame implements StaffWindow {
         isInitialized = val;
     }
 
-    public void init(LibraryStaff libraryStaff) {
-        this.libraryStaff = libraryStaff;
+    public void init(Librarian librarian) {
+        this.librarian = librarian;
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel formPanel = new JPanel(new FlowLayout());
 
@@ -48,7 +48,7 @@ public class SearchMemberWindow extends JFrame implements StaffWindow {
         searchButton.addActionListener(evt -> {
             String id = memberIdField.getText();
             // TODO
-            String response = libraryStaff.getMemberById(id);
+            String response = librarian.getMemberById(id);
             JOptionPane.showMessageDialog(SearchMemberWindow.this, "Member returned: " + response);
             // Add logic to search book by ISBN
         });

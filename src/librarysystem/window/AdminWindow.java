@@ -1,7 +1,7 @@
 package librarysystem.window;
 
-import business.AbstractServiceFactory;
-import business.LibraryStaff;
+import components.backend.Administrator;
+import components.backend.User;
 import librarysystem.LibWindow;
 import librarysystem.LibrarySystem;
 import librarysystem.Util;
@@ -19,7 +19,7 @@ public class AdminWindow extends JFrame implements LibWindow {
     public static final AdminWindow INSTANCE = new AdminWindow();
     private boolean isInitialized = false;
 
-    private LibraryStaff libraryStaff;
+    private Administrator administrator;
 
     private JPanel mainPanel;
     private JPanel topPanel;
@@ -33,8 +33,14 @@ public class AdminWindow extends JFrame implements LibWindow {
     private JButton searchBookButton;
 
     private AdminWindow() {
+
     }
 
+
+    @Override
+    public void init() {
+
+    }
 
     public boolean isInitialized() {
         return isInitialized;
@@ -45,8 +51,9 @@ public class AdminWindow extends JFrame implements LibWindow {
     }
 
 
-    public void init() {
-        libraryStaff = AbstractServiceFactory.getAdminLibraryService();
+    public void init(User user) {
+        administrator = new Administrator(user);
+
         mainPanel = new JPanel();
         mainPanel.setLayout(new BorderLayout());
 
@@ -113,7 +120,7 @@ public class AdminWindow extends JFrame implements LibWindow {
 
     class AddMemberListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            AddMemberWindow.INSTANCE.init(libraryStaff);
+            AddMemberWindow.INSTANCE.init(administrator);
             AddMemberWindow.INSTANCE.setVisible(true);
             AdminWindow.INSTANCE.setVisible(false);
             Util.centerFrameOnDesktop(AddMemberWindow.INSTANCE);
@@ -131,7 +138,7 @@ public class AdminWindow extends JFrame implements LibWindow {
 
     class AddBookListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            AddBookWindow.INSTANCE.init(libraryStaff);
+            AddBookWindow.INSTANCE.init(administrator);
             AddBookWindow.INSTANCE.setVisible(true);
             AdminWindow.INSTANCE.setVisible(false);
             Util.centerFrameOnDesktop(AddBookWindow.INSTANCE);
@@ -141,7 +148,7 @@ public class AdminWindow extends JFrame implements LibWindow {
 
     class AddBookCopyListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            AddBookCopyWindow.INSTANCE.init(libraryStaff);
+            AddBookCopyWindow.INSTANCE.init(administrator);
             AddBookCopyWindow.INSTANCE.setVisible(true);
 //            AddBookCopyWindow.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             AdminWindow.INSTANCE.setVisible(false);
@@ -152,7 +159,7 @@ public class AdminWindow extends JFrame implements LibWindow {
 
     class SearchBookListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            SearchBookWindow.INSTANCE.init(libraryStaff);
+            SearchBookWindow.INSTANCE.init(administrator);
             SearchBookWindow.INSTANCE.setVisible(true);
             AdminWindow.INSTANCE.setVisible(false);
             Util.centerFrameOnDesktop(SearchBookWindow.INSTANCE);

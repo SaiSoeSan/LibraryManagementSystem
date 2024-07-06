@@ -1,8 +1,8 @@
 package librarysystem.window.usecase;
 
 import business.CheckOutRecord;
-import business.LibraryStaff;
-import librarysystem.StaffWindow;
+import components.backend.Librarian;
+import librarysystem.LibWindow;
 import librarysystem.Util;
 import librarysystem.window.LibrarianWindow;
 
@@ -12,11 +12,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class CheckoutBookWindow extends JFrame implements StaffWindow {
+public class CheckoutBookWindow extends JFrame implements LibWindow {
     public static final CheckoutBookWindow INSTANCE = new CheckoutBookWindow();
     private boolean isInitialized = false;
 
-    private LibraryStaff libraryStaff;
+    private Librarian librarian;
 
     private JTextField memberIdField;
     private JTextField isbnField;
@@ -38,8 +38,9 @@ public class CheckoutBookWindow extends JFrame implements StaffWindow {
         isInitialized = val;
     }
 
-    public void init(LibraryStaff libraryStaff) {
-        this.libraryStaff = libraryStaff;
+    public void init(Librarian librarian) {
+        this.librarian = librarian;
+
 
         JPanel mainPanel = new JPanel(new BorderLayout());
         mainPanel.setPreferredSize(new Dimension(800, 600)); // Set preferred size

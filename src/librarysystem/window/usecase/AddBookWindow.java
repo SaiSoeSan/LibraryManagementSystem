@@ -3,8 +3,8 @@ package librarysystem.window.usecase;
 import business.Address;
 import business.Author;
 import business.Book;
-import business.LibraryStaff;
-import librarysystem.StaffWindow;
+import components.backend.Administrator;
+import librarysystem.LibWindow;
 import librarysystem.Util;
 import librarysystem.window.AdminWindow;
 
@@ -15,11 +15,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AddBookWindow extends JFrame implements StaffWindow {
+public class AddBookWindow extends JFrame implements LibWindow {
     public static final AddBookWindow INSTANCE = new AddBookWindow();
     private boolean isInitialized = false;
 
-    private LibraryStaff libraryStaff;
+    private Administrator administrator;
 
     private JTextField isbnField;
     private JTextField titleField;
@@ -42,8 +42,8 @@ public class AddBookWindow extends JFrame implements StaffWindow {
         isInitialized = val;
     }
 
-    public void init(LibraryStaff libraryStaff) {
-        this.libraryStaff = libraryStaff;
+    public void init(Administrator administrator) {
+        this.administrator = administrator;
         authorFieldSets = new ArrayList<>();
 
         JPanel mainPanel = new JPanel(new BorderLayout());
@@ -130,8 +130,14 @@ public class AddBookWindow extends JFrame implements StaffWindow {
             String maxCheckoutLength = maxCheckoutLengthField.getText();
             String numCopies = numCopiesField.getText();
 
-            int maxCheckoutLengthInt = Integer.parseInt(maxCheckoutLength);
-            int numCopiesInt = Integer.parseInt(numCopies);
+            int maxCheckoutLengthInt = 5;
+            int numCopiesInt = 1;
+            try{
+                 maxCheckoutLengthInt = Integer.parseInt(maxCheckoutLength);
+                 numCopiesInt = Integer.parseInt(numCopies);
+            } catch (NumberFormatException e) {
+            }
+
 
             List<Author> authors = new ArrayList<>();
             for (AuthorFieldSet authorFieldSet : authorFieldSets) {
@@ -152,10 +158,11 @@ public class AddBookWindow extends JFrame implements StaffWindow {
             }
 
             try {
+             // TODO what about Authors details from front end
                 Book book = new Book(isbn, title, maxCheckoutLengthInt, numCopiesInt, authors);
-                String response = libraryStaff.AddNewBook(book);
+                administrator.addNewBook(isbn, title, authors.size(), maxCheckoutLengthInt, numCopiesInt);
                 clearFields();
-                JOptionPane.showMessageDialog(AddBookWindow.this, "New book added successfully. " + response);
+                JOptionPane.showMessageDialog(AddBookWindow.this, "New book added successfully. " );
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(AddBookWindow.this, "Error: " + e.getMessage());
             }
