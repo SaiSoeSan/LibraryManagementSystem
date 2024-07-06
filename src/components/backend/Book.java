@@ -7,22 +7,25 @@ import java.util.List;
 
 public class Book implements Serializable, Comparable<Book> {
     private static final long serialVersionUID = 1022965883958618544L;
-//
+    //
     private String title;
     private String isbn;
     private int maxCheckoutLength;
     private List<BookCopy> bookCopyList;
     private List<Author> authors;
 
-    public Book(String isbn, String title, int maxCheckoutLength, List<Author> authors, int numCopies) {
+    private Book(String isbn, String title, int maxCheckoutLength, List<Author> authors, int numCopies) {
         this.isbn = isbn;
         this.title = title;
         this.maxCheckoutLength = maxCheckoutLength;
         this.authors = authors;
         this.bookCopyList = new ArrayList<>();
         for (int i = 0; i < numCopies; i++) {
-            bookCopyList.add(new BookCopy(isbn + "-" + i, true));
+            bookCopyList.add(BookCopy.createNewCopy(isbn + "-" + i, true));
         }
+    }
+    public static Book createNewBook(String isbn, String title, int maxCheckoutLength, List<Author> authors, int numCopies){
+        return new Book(isbn, title, maxCheckoutLength, authors, numCopies);
     }
 
     public String getIsbn() {
@@ -30,10 +33,10 @@ public class Book implements Serializable, Comparable<Book> {
     }
 
     public BookCopy getBookCopy() {
-        if(!bookCopyList.isEmpty()) {
-            return bookCopyList.getFirst();
+        for (BookCopy bookCopy : bookCopyList) {
+            if (bookCopy.isAvailable()) return bookCopy;
         }
-        else return null;
+        return null;
     }
 
 
@@ -42,11 +45,13 @@ public class Book implements Serializable, Comparable<Book> {
     }
 
     public void saveBook() throws IOException {
-        DataAccess.saveBook(this);;
+        DataAccess.saveBook(this);
+        ;
     }
+
     public void createNewCopy() {
         String uniqueNumber = BookCopy.generateRandomString(5);
-        bookCopyList.add(new BookCopy(uniqueNumber, true));
+        bookCopyList.add(BookCopy.createNewCopy(uniqueNumber, true));
     }
 
     public String getTitle() {

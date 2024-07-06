@@ -1,5 +1,7 @@
 package components.backend;
 
+import components.backend.Exception.BookNotFoundException;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
@@ -16,15 +18,16 @@ public class Administrator extends UserRole implements Serializable {
 
         // save updated members list to the file
         try {
-            Address address = new Address(street, city, state, zip);
+            Address address = Address.CreateNewAddress(street, city, state, zip);
 
-            DataAccess.saveMember(new Member(firstName, lastName, phoneNumber, address, memberId));
+            Member.createMember(firstName, lastName, phoneNumber, address, memberId);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
         System.out.println("New member added successfully!");
     }
+
     public Book searchBookByIsbn(String isbn) {
         return DataAccess.readBook(isbn);
     }
@@ -35,7 +38,7 @@ public class Administrator extends UserRole implements Serializable {
         System.out.println("adding book....");
 
         try {
-            Book book = new Book(isbn, title, maxCheckoutLength, authors, numberOfCopies);
+            Book book = Book.createNewBook(isbn, title, maxCheckoutLength, authors, numberOfCopies);
             DataAccess.saveBook(book);
         } catch (IOException e) {
             e.printStackTrace();
@@ -44,8 +47,11 @@ public class Administrator extends UserRole implements Serializable {
         System.out.println("New Book added successfully!");
     }
 
-    public void addCopyOfBook(String isbn) throws IOException {
+    public void addCopyOfBook(String isbn) throws IOException, BookNotFoundException {
         Book book = DataAccess.readBook(isbn);
+        if (book == null) {
+            throw new BookNotFoundException("ISBN not found.");
+        }
         book.createNewCopy();
         book.saveBook();
         System.out.println("New copy book added successfully!");

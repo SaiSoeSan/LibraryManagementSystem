@@ -16,10 +16,16 @@ public class Member extends Person implements Serializable, Comparable<Member> {
     private String memberId;
     private List<CheckoutEntry> checkoutEntries;
 
-    public Member(String firstName, String lastName, String phoneNumber, Address address, String memberId) {
+    private Member(String firstName, String lastName, String phoneNumber, Address address, String memberId) {
         super(firstName, lastName, phoneNumber, address);
         this.memberId = memberId;
         this.checkoutEntries = new ArrayList<CheckoutEntry>();
+    }
+
+    public static Member createMember(String firstName, String lastName, String phoneNumber, Address address, String memberId) throws IOException {
+        Member member = new Member(firstName, lastName, phoneNumber, address, memberId);
+        DataAccess.saveMember(member);
+        return member;
     }
 
     @Override
@@ -43,7 +49,7 @@ public class Member extends Person implements Serializable, Comparable<Member> {
             throw new BookNotFoundException("Book not found."); // can throw exception here
         }
         BookCopy bookCopy = book.getBookCopy();
-        CheckoutEntry checkoutEntry = new CheckoutEntry(LocalDate.now(), LocalDate.now(), bookCopy);
+        CheckoutEntry checkoutEntry = CheckoutEntry.createCheckoutEntry(LocalDate.now(), LocalDate.now(), bookCopy);
         member.checkoutEntries.add(checkoutEntry);
         DataAccess.saveMember(member);
         book.saveBook();
@@ -54,7 +60,7 @@ public class Member extends Person implements Serializable, Comparable<Member> {
     public List<CheckoutEntry> getCheckoutRecord() {
         return checkoutEntries;
     }
-    
+
     @Override
     public int compareTo(Member o) {
         return o.getMemberId().compareTo(memberId);

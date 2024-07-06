@@ -11,9 +11,14 @@ public class BookCopy implements Serializable {
 
     private String uniqueNumber;
     private boolean availability;
-    public BookCopy(String uniqueNumber, boolean availability){
-            this.uniqueNumber = uniqueNumber;
-            this.availability = availability;
+
+    private BookCopy(String uniqueNumber, boolean availability) {
+        this.uniqueNumber = uniqueNumber;
+        this.availability = availability;
+    }
+
+    public static BookCopy createNewCopy(String uniqueNumber, boolean availability) {
+        return new BookCopy(uniqueNumber, availability);
     }
 
     public String getUniqueNumber() {
@@ -26,6 +31,10 @@ public class BookCopy implements Serializable {
             sb.append(CHARACTERS.charAt(RANDOM.nextInt(CHARACTERS.length())));
         }
         return sb.toString();
+    }
+
+    public boolean isAvailable() {
+        return availability;
     }
 
     @Override

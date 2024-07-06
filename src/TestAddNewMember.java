@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class TestAddNewMember {
     public static void main(String[] args) {
-        Address address = new Address("123 Main St", "Springfield", "IL", "62704");
+        Address address = Address.CreateNewAddress("123 Main St", "Springfield", "IL", "62704");
 
         // Create users
         User admin = new User("admin1", "adminPass", "Alice", "Smith", "123-456-7890", address);
@@ -13,7 +13,6 @@ public class TestAddNewMember {
         Administrator adminRole = new Administrator(admin);
 
         admin.addRole("Administrator", adminRole);
-
 
 
         // Create users
@@ -32,8 +31,6 @@ public class TestAddNewMember {
 
         superAdmin.addRole("Librarian", librarianRole);
         superAdmin.addRole("Administrator", adminRole);
-
-
 
 
         try {
@@ -68,7 +65,7 @@ public class TestAddNewMember {
                 String zip = "24234234";
                 String phoneNumber = "4823856";
 
-                administrator.addNewMember(memberId,firstName,lastName,street,city,state,zip,phoneNumber);
+                administrator.addNewMember(memberId, firstName, lastName, street, city, state, zip, phoneNumber);
 
             } else {
                 System.out.println("Login failed.");

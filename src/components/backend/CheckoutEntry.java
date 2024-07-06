@@ -10,12 +10,14 @@ public class CheckoutEntry implements Serializable {
     private LocalDate checkoutDate;
     private LocalDate dueDate;
     private BookCopy bookCopy;
-    public CheckoutEntry(LocalDate checkoutDate, LocalDate dueDate, BookCopy bookCopy) {
+    private CheckoutEntry(LocalDate checkoutDate, LocalDate dueDate, BookCopy bookCopy) {
         this.checkoutDate = checkoutDate;
         this.dueDate = dueDate;
         this.bookCopy = bookCopy;
     }
-
+    public  static  CheckoutEntry createCheckoutEntry(LocalDate checkoutDate, LocalDate dueDate, BookCopy bookCopy) {
+        return new CheckoutEntry(checkoutDate, dueDate, bookCopy);
+    }
     public LocalDate getCheckoutDate() {
         return checkoutDate;
     }

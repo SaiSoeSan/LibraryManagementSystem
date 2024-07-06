@@ -10,10 +10,14 @@ public class Address implements Serializable {
     private String zip;
 
     // Constructor, getters, and setters
-    public Address(String street, String city, String state, String zip) {
+    private Address(String street, String city, String state, String zip) {
         this.street = street;
         this.city = city;
         this.state = state;
         this.zip = zip;
+    }
+    public static Address CreateNewAddress(String street, String city, String state, String zip)
+    {
+        return new Address(street, city, state, zip);
     }
 }
