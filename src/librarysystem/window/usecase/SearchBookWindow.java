@@ -48,9 +48,8 @@ public class SearchBookWindow extends JFrame implements LibWindow {
 
         searchButton.addActionListener(evt -> {
             String isbn = isbnField.getText();
-            // TODO
             Book response = administrator.searchBookByIsbn(isbn);
-            JOptionPane.showMessageDialog(SearchBookWindow.this, "Book returned: " + response);
+            JOptionPane.showMessageDialog(SearchBookWindow.this, "Book returned: \n Title:" + response.getTitle());
             // Add logic to search book by ISBN
         });
 

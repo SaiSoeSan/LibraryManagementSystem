@@ -206,6 +206,10 @@ public class LoginWindow extends JFrame implements LibWindow {
 					System.out.println("Login failed. Invalid Role");
 				}
 			}
+
+			else {
+				System.out.println("Login failed. Invalid credential");
+			}
 		});
 	}
 
