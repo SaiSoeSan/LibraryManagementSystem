@@ -1,8 +1,9 @@
 package components.backend;
 
+import components.backend.Exception.BookNotFoundException;
 import components.backend.Exception.MemberNotFoundException;
-import business.CheckOutRecord;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.List;
 
@@ -13,12 +14,12 @@ public class Librarian extends UserRole implements Serializable {
         super(user);
     }
 
-    public void checkOutBook() {
-        System.out.println(user.getFirstName() + " is checking out a book...");
+    public CheckoutEntry checkOutBook(String memberId, String isbn) throws MemberNotFoundException, BookNotFoundException, IOException {
+        return Member.checkoutBook(memberId, isbn);
     }
 
-    public void searchBookByISBN(String isbn) {
-
+    public Book searchBookByISBN(String isbn) {
+        return DataAccess.readBook(isbn);
     }
 
     @Override
@@ -34,6 +35,11 @@ public class Librarian extends UserRole implements Serializable {
         }
         List<CheckoutEntry> checkoutEntries = member.getCheckoutRecord();
         return checkoutEntries;
+
+    }
+
+    public Member getMemberById(String id) {
+       return DataAccess.readMember(id);
     }
 
 }

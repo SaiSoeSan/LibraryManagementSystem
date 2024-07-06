@@ -1,9 +1,8 @@
 package librarysystem.window.usecase;
 
-import business.Address;
-import business.Author;
-import business.Book;
+import components.backend.Address;
 import components.backend.Administrator;
+import components.backend.Author;
 import librarysystem.LibWindow;
 import librarysystem.Util;
 import librarysystem.window.AdminWindow;
@@ -153,14 +152,12 @@ public class AddBookWindow extends JFrame implements LibWindow {
 
                 Address address = new Address(street, city, state, zip);
 
-                Author author = new Author(firstName, lastName, phone, address, credentials, bio);
+                Author author = new Author(firstName, lastName, phone, address, bio, credentials);
                 authors.add(author);
             }
 
             try {
-             // TODO what about Authors details from front end
-                Book book = new Book(isbn, title, maxCheckoutLengthInt, numCopiesInt, authors);
-                administrator.addNewBook(isbn, title, authors.size(), maxCheckoutLengthInt, numCopiesInt);
+                administrator.addNewBook(isbn, title, authors, maxCheckoutLengthInt, numCopiesInt);
                 clearFields();
                 JOptionPane.showMessageDialog(AddBookWindow.this, "New book added successfully. " );
             } catch (Exception e) {

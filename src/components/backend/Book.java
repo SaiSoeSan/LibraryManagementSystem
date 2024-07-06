@@ -35,6 +35,16 @@ public class Book implements Serializable, Comparable<Book> {
         }
         else return null;
     }
+
+
+    public List<BookCopy> getBookCopyList() {
+        return bookCopyList;
+    }
+
+    public void setBookCopyList(List<BookCopy> bookCopyList) {
+        this.bookCopyList = bookCopyList;
+    }
+
     public void saveBook() throws IOException {
         DataAccess.saveBook(this);;
     }
@@ -42,7 +52,15 @@ public class Book implements Serializable, Comparable<Book> {
         String uniqueNumber = BookCopy.generateRandomString(5);
         bookCopyList.add(new BookCopy(uniqueNumber, true));
     }
-//    public boolean isAvailable() {
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+    //    public boolean isAvailable() {
 //        return availability;
 //    }
 
