@@ -15,6 +15,7 @@ public class TestLogin {
         Librarian libRole = new Librarian(librarian);
 
         admin.addRole("Administrator", adminRole);
+        admin.addRole("Librarian",libRole);
         librarian.addRole("Librarian", libRole);
 
         try {
@@ -28,17 +29,14 @@ public class TestLogin {
         if (loggedInUser != null) {
             System.out.println("Login successful!");
 
-            // Determine role
-            if (loggedInUser.getRole("Librarian") != null) {
-                System.out.println("User is a Librarian");
+            if(loggedInUser.getRole("Librarian") != null && loggedInUser.getRole("Administrator") != null){
+                System.out.println("Both Admin and Librarian");
+            }else if (loggedInUser.getRole("Librarian") != null) {
                 Librarian librarianRole = (Librarian) loggedInUser.getRole("Librarian");
-            }
-            if (loggedInUser.getRole("Administrator") != null) {
-                System.out.println("User is a Administrator");
+            }else if (loggedInUser.getRole("Administrator") != null) {
                 Administrator administrator = (Administrator) loggedInUser.getRole("Administrator");
-
-            } else {
-                System.out.println("Login failed.");
+            }else{
+                System.out.println("Login fail");
             }
         }
     }
