@@ -14,7 +14,7 @@ public class Member extends Person implements Serializable {
     @Serial
     private static final long serialVersionUID = 1022965883958618544L;
     private String memberId;
-    private static List<CheckoutEntry> checkoutEntries;
+    private List<CheckoutEntry> checkoutEntries;
 
     public Member(String firstName, String lastName, String phoneNumber, Address address, String memberId) {
         super(firstName, lastName, phoneNumber, address);
@@ -44,12 +44,13 @@ public class Member extends Person implements Serializable {
         }
         BookCopy bookCopy = book.getBookCopy();
         CheckoutEntry checkoutEntry = new CheckoutEntry(LocalDate.now(), LocalDate.now(), bookCopy);
-        checkoutEntries.add(checkoutEntry);
+        member.checkoutEntries.add(checkoutEntry);
         DataAccess.saveMember(member);
         book.saveBook();
 
         return checkoutEntry;
     }
+
     public List<CheckoutEntry> getCheckoutRecord() {
         return checkoutEntries;
     }

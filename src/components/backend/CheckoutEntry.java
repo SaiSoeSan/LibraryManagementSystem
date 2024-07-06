@@ -1,8 +1,12 @@
 package components.backend;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class CheckoutEntry {
+public class CheckoutEntry implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1022965883958618544L;
     private LocalDate checkoutDate;
     private LocalDate dueDate;
     private BookCopy bookCopy;

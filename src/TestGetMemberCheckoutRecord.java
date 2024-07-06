@@ -46,8 +46,7 @@ public class TestGetMemberCheckoutRecord {
                 Member.checkoutBook("100", "5001");
                 Member.checkoutBook("100", "5002");
                 Member.checkoutBook("101", "5001");
-            }
-             else {
+            } else {
                 System.out.println("Login failed.");
             }
         }
@@ -56,8 +55,14 @@ public class TestGetMemberCheckoutRecord {
             Librarian librarianRole;
             if (loggedInLibrarian.getRole("Librarian") != null) {
                 System.out.println("User is a Librarian");
+                System.out.println("Getting checkout record for memberid : 100");
                 librarianRole = (Librarian) loggedInLibrarian.getRole("Librarian");
                 List<CheckoutEntry> entries = librarianRole.getMemberCheckoutRecord("100");
+                for (CheckoutEntry entry : entries) {
+                    System.out.println(entry);
+                }
+                System.out.println("Getting checkout record for memberid : 101");
+                entries = librarianRole.getMemberCheckoutRecord("101");
                 for (CheckoutEntry entry : entries) {
                     System.out.println(entry);
                 }
