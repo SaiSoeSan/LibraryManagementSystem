@@ -36,11 +36,10 @@ public class Librarian extends UserRole implements Serializable {
         List<CheckoutEntry> checkoutEntries = member.getCheckoutRecord();
         return checkoutEntries;
 
+    }
+
     public Member getMemberById(String id) {
        return DataAccess.readMember(id);
     }
 
-    public List<CheckoutEntry> PrintMemberCheckOutRecord(String memberId) {
-        return null;
-    }
 }

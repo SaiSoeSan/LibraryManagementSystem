@@ -85,7 +85,7 @@ public class PrintCheckoutRecordWindow extends JFrame implements LibWindow {
             String memberId = memberIdField.getText();
 
             try {
-                List<CheckoutEntry> checkoutRecords = librarian.PrintMemberCheckOutRecord(memberId);
+                List<CheckoutEntry> checkoutRecords = librarian.getMemberCheckoutRecord(memberId);
 
 
                 if (!checkoutRecords.isEmpty()) {
