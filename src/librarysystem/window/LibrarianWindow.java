@@ -1,8 +1,8 @@
 package librarysystem.window;
 
 
-import business.AbstractServiceFactory;
-import business.LibraryStaff;
+import components.backend.Librarian;
+import components.backend.User;
 import librarysystem.LibWindow;
 import librarysystem.LibrarySystem;
 import librarysystem.Util;
@@ -19,9 +19,16 @@ import java.awt.event.ActionListener;
 public class LibrarianWindow extends JFrame implements LibWindow {
     public static final LibrarianWindow INSTANCE = new LibrarianWindow();
     private boolean isInitialized = false;
-    private LibraryStaff libraryStaff;
+    private Librarian librarian;
 
-    private LibrarianWindow() {}
+    private LibrarianWindow() {
+
+    }
+
+    @Override
+    public void init() {
+
+    }
 
     public boolean isInitialized() {
         return isInitialized;
@@ -31,8 +38,9 @@ public class LibrarianWindow extends JFrame implements LibWindow {
         isInitialized = val;
     }
 
-    public void init() {
-        libraryStaff = AbstractServiceFactory.getLibraryService();
+    public void init(User user) {
+        librarian = new Librarian(user);
+
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -71,7 +79,7 @@ public class LibrarianWindow extends JFrame implements LibWindow {
 
     class CheckoutBookButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            CheckoutBookWindow.INSTANCE.init(libraryStaff);
+            CheckoutBookWindow.INSTANCE.init(librarian);
             CheckoutBookWindow.INSTANCE.setVisible(true);
 //            CheckoutBookWindow.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             LibrarianWindow.INSTANCE.setVisible(false);
@@ -83,7 +91,7 @@ public class LibrarianWindow extends JFrame implements LibWindow {
 
     class PrintCheckoutRecordButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            PrintCheckoutRecordWindow.INSTANCE.init(libraryStaff);
+            PrintCheckoutRecordWindow.INSTANCE.init(librarian);
             PrintCheckoutRecordWindow.INSTANCE.setVisible(true);
             LibrarianWindow.INSTANCE.setVisible(false);
             Util.centerFrameOnDesktop(PrintCheckoutRecordWindow.INSTANCE);
@@ -93,7 +101,7 @@ public class LibrarianWindow extends JFrame implements LibWindow {
 
     class SearchMemberButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            SearchMemberWindow.INSTANCE.init(libraryStaff);
+            SearchMemberWindow.INSTANCE.init(librarian);
             SearchMemberWindow.INSTANCE.setVisible(true);
             LibrarianWindow.INSTANCE.setVisible(false);
         }
@@ -101,7 +109,7 @@ public class LibrarianWindow extends JFrame implements LibWindow {
 
     class SearchBookButtonListener implements ActionListener {
         public void actionPerformed(ActionEvent evt) {
-            SearchDueBookWindow.INSTANCE.init(libraryStaff);
+            SearchDueBookWindow.INSTANCE.init(librarian);
             SearchDueBookWindow.INSTANCE.setVisible(true);
             LibrarianWindow.INSTANCE.setVisible(false);
         }

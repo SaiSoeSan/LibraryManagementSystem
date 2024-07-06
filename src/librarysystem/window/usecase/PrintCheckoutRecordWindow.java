@@ -1,8 +1,8 @@
 package librarysystem.window.usecase;
 
 import business.CheckOutRecord;
-import business.LibraryStaff;
-import librarysystem.StaffWindow;
+import components.backend.Librarian;
+import librarysystem.LibWindow;
 import librarysystem.Util;
 import librarysystem.window.LibrarianWindow;
 
@@ -13,11 +13,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
+public class PrintCheckoutRecordWindow extends JFrame implements LibWindow {
     public static final PrintCheckoutRecordWindow INSTANCE = new PrintCheckoutRecordWindow();
     private boolean isInitialized = false;
 
-    private LibraryStaff libraryStaff;
+    private Librarian librarian;
 
     private PrintCheckoutRecordWindow() {}
 
@@ -25,6 +25,7 @@ public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
     public void init() {
 
     }
+
 
     public boolean isInitialized() {
         return isInitialized;
@@ -34,8 +35,8 @@ public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
         isInitialized = val;
     }
 
-    public void init(LibraryStaff libraryStaff) {
-        this.libraryStaff = libraryStaff;
+    public void init(Librarian librarian) {
+        this.librarian = librarian;
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -84,10 +85,9 @@ public class PrintCheckoutRecordWindow extends JFrame implements StaffWindow {
             String memberId = memberIdField.getText();
 
             try {
-//                List<CheckOutRecord> checkoutRecords = libraryStaff.PrintMemberCheckOutRecord(memberId);
-
                 // TODO
-                List<CheckOutRecord> checkoutRecords = List.of(new CheckOutRecord());
+                List<CheckOutRecord> checkoutRecords = librarian.PrintMemberCheckOutRecord(memberId);
+
 
                 if (!checkoutRecords.isEmpty()) {
                     displayCheckoutRecords(checkoutRecords);

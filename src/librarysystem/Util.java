@@ -1,14 +1,7 @@
 package librarysystem;
 
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Font;
-import java.awt.Toolkit;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
-import javax.swing.JLabel;
+import javax.swing.*;
+import java.awt.*;
 
 public class Util {
 	public static final Color DARK_BLUE = Color.BLUE.darker();
@@ -35,24 +28,9 @@ public class Util {
 		label.setForeground(color);
 		
 	}
-	/** Sorts a list of numeric strings in natural number order */
-	public static List<String> numericSort(List<String> list) {
-		Collections.sort(list, new NumericSortComparator());
-		return list;
-	}
+
 	
-	static class NumericSortComparator implements Comparator<String>{
-		@Override
-		public int compare(String s, String t) {
-			if(!isNumeric(s) || !isNumeric(t)) 
-				throw new IllegalArgumentException("Input list has non-numeric characters");
-			int sInt = Integer.parseInt(s);
-			int tInt = Integer.parseInt(t);
-			if(sInt < tInt) return -1;
-			else if(sInt == tInt) return 0;
-			else return 1;
-		}
-	}
+
 	
 	public static boolean isNumeric(String s) {
 		if(s==null) return false;

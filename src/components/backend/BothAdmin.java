@@ -5,10 +5,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Administrator extends UserRole implements Serializable {
+public class BothAdmin extends UserRole implements Serializable {
     private static final long serialVersionUID = 1022965883958618544L;
 
-    public Administrator(User user) {
+    public BothAdmin(User user) {
         super(user);
     }
 
@@ -27,11 +27,6 @@ public class Administrator extends UserRole implements Serializable {
         System.out.println("New member added successfully!");
 
 
-    }
-
-
-    public Book searchBookByIsbn(String isbn) {
-        return null;
     }
 
 

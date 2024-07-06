@@ -11,13 +11,11 @@ public class Main {
 	public static void main(String[] args) {
 	      EventQueue.invokeLater(() -> 
 	         {
-	            LoginWindow.INSTANCE.setTitle("Sample Library Application");
-//				 LoginWindow.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	            LibrarySystem.INSTANCE.setTitle("Sample Library Application");
 
-				 LoginWindow.INSTANCE.init();
-//	            centerFrameOnDesktop(LoginWindow.INSTANCE);
-				 LoginWindow.INSTANCE.setVisible(true);
-				 Util.centerFrameOnDesktop(LoginWindow.INSTANCE);
+				 LibrarySystem.INSTANCE.init();
+				 LibrarySystem.INSTANCE.setVisible(true);
+				 Util.centerFrameOnDesktop(LibrarySystem.INSTANCE);
 	         });
 	   }
 

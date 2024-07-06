@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Book implements Serializable {
+public class Book implements Serializable, Comparable<Book> {
     private static final long serialVersionUID = 1022965883958618544L;
 //
     private String title;
@@ -58,4 +58,18 @@ public class Book implements Serializable {
 //    public String toString() {
 //        return "BookCopy [uniqueNumber=" + uniqueNumber + ", availability=" + availability + "]";
 //    }
+
+
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", isbn='" + isbn + '\'' +
+                '}';
+    }
+
+    @Override
+    public int compareTo(Book o) {
+        return o.isbn.compareTo(this.isbn);
+    }
 }

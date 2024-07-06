@@ -1,7 +1,7 @@
 package librarysystem.window.usecase;
 
-import business.LibraryStaff;
-import librarysystem.StaffWindow;
+import components.backend.Administrator;
+import librarysystem.LibWindow;
 import librarysystem.Util;
 import librarysystem.window.AdminWindow;
 
@@ -10,11 +10,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class AddMemberWindow extends JFrame implements StaffWindow {
+public class AddMemberWindow extends JFrame implements LibWindow {
     public static final AddMemberWindow INSTANCE = new AddMemberWindow();
     private boolean isInitialized = false;
 
-    private LibraryStaff libraryStaff;
+    private Administrator administrator;
 
     private JTextField memberIdField;
     private JTextField firstNameField;
@@ -38,8 +38,8 @@ public class AddMemberWindow extends JFrame implements StaffWindow {
         isInitialized = val;
     }
 
-    public void init(LibraryStaff libraryStaff) {
-        this.libraryStaff = libraryStaff;
+    public void init(components.backend.Administrator administrator) {
+        this.administrator = administrator;
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel formPanel = new JPanel(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -107,9 +107,9 @@ public class AddMemberWindow extends JFrame implements StaffWindow {
             String phone = phoneField.getText();
 
             try {
-                String response = libraryStaff.addNewLibraryMember(memberId, firstName, lastName, phone, street, city, state, zip);
+                administrator.addNewMember(memberId,firstName,lastName,street,city,state,zip,phone);
                 clearFields();
-                JOptionPane.showMessageDialog(AddMemberWindow.this, "New Member Added Successfully " + response);
+                JOptionPane.showMessageDialog(AddMemberWindow.this, "New Member Added Successfully ");
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(AddMemberWindow.this, "Error: " + e.getMessage());
             }

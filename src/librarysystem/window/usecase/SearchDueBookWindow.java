@@ -1,8 +1,8 @@
 package librarysystem.window.usecase;
 
 import business.BookCopy;
-import business.LibraryStaff;
-import librarysystem.StaffWindow;
+import components.backend.Librarian;
+import librarysystem.LibWindow;
 import librarysystem.window.AdminWindow;
 
 import javax.swing.*;
@@ -10,12 +10,12 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.List;
 
-public class SearchDueBookWindow extends JFrame implements StaffWindow {
+public class SearchDueBookWindow extends JFrame implements LibWindow {
     public static final SearchDueBookWindow INSTANCE = new SearchDueBookWindow();
     private boolean isInitialized = false;
 
     private JTextField isbnField;
-    private LibraryStaff libraryStaff;
+    private Librarian Liberian;
     private JTable resultTable;
     private DefaultTableModel tableModel;
 
@@ -33,8 +33,8 @@ public class SearchDueBookWindow extends JFrame implements StaffWindow {
         isInitialized = val;
     }
 
-    public void init(LibraryStaff libraryStaff) {
-        this.libraryStaff = libraryStaff;
+    public void init(Librarian librarian) {
+        this.Liberian = librarian;
         JPanel mainPanel = new JPanel(new BorderLayout());
         JPanel formPanel = new JPanel(new FlowLayout());
 

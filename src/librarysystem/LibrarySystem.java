@@ -1,5 +1,8 @@
 package librarysystem;
 
+import components.backend.Book;
+import components.backend.DataAccess;
+import components.backend.Member;
 import librarysystem.window.usecase.AllMemberIdsWindow;
 import librarysystem.window.usecase.LoginWindow;
 
@@ -11,8 +14,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 
-import static business.LibraryStaff.allBookIds;
-import static business.LibraryStaff.allMemberIds;
 
 
 public class LibrarySystem extends JFrame implements LibWindow {
@@ -166,13 +167,13 @@ public class LibrarySystem extends JFrame implements LibWindow {
             LibrarySystem.hideAllWindows();
             AllBookIdsWindow.INSTANCE.init();
 
-            ArrayList<String> ids = (ArrayList<String>) allBookIds();
-            Collections.sort(ids);
+            ArrayList<Book> bookList = (ArrayList<Book>) DataAccess.getBooksList();
+//            Collections.sort(ids);
             StringBuilder sb = new StringBuilder();
-            for (String s : ids) {
-                sb.append(s + "\n");
+            for (Book book : bookList) {
+                sb.append(book.getIsbn() + "\n");
             }
-            System.out.println(sb.toString());
+            System.out.println(sb);
             AllBookIdsWindow.INSTANCE.setData(sb.toString());
             AllBookIdsWindow.INSTANCE.pack();
             //AllBookIdsWindow.INSTANCE.setSize(660,500);
@@ -193,16 +194,16 @@ public class LibrarySystem extends JFrame implements LibWindow {
             AllMemberIdsWindow.INSTANCE.setVisible(true);
 
 
-            LibrarySystem.hideAllWindows();
+            hideAllWindows();
             AllBookIdsWindow.INSTANCE.init();
 
-            ArrayList<String> ids = (ArrayList<String>) allMemberIds();
-            Collections.sort(ids);
+            ArrayList<Member> membersList = (ArrayList<Member>) DataAccess.getMembersList();
+            Collections.sort(membersList);
             StringBuilder sb = new StringBuilder();
-            for (String s : ids) {
-                sb.append(s + "\n");
+            for (Member member : membersList) {
+                sb.append(member.getMemberId() + "  "+ member.getFirstName() + "\n");
             }
-            System.out.println(sb.toString());
+            System.out.println(sb);
             AllMemberIdsWindow.INSTANCE.setData(sb.toString());
             AllMemberIdsWindow.INSTANCE.pack();
             //AllMemberIdsWindow.INSTANCE.setSize(660,500);
