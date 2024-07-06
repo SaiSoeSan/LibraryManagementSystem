@@ -1,6 +1,7 @@
 package components.backend;
 
 import components.backend.Exception.MemberNotFoundException;
+import business.CheckOutRecord;
 
 import java.io.Serializable;
 import java.util.List;
