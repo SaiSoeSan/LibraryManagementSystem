@@ -50,4 +50,7 @@ public class Member extends Person implements Serializable {
 
         return checkoutEntry;
     }
+    public List<CheckoutEntry> getCheckoutRecord() {
+        return checkoutEntries;
+    }
 }
