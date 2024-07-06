@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Member extends Person implements Serializable {
+public class Member extends Person implements Serializable, Comparable<Member> {
     @Serial
     private static final long serialVersionUID = 1022965883958618544L;
     private String memberId;
@@ -53,5 +53,10 @@ public class Member extends Person implements Serializable {
 
     public List<CheckoutEntry> getCheckoutRecord() {
         return checkoutEntries;
+    }
+    
+    @Override
+    public int compareTo(Member o) {
+        return o.getMemberId().compareTo(memberId);
     }
 }
