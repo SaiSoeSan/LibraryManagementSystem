@@ -1,8 +1,10 @@
+package storage;
+
 import components.backend.*;
 
 import java.io.IOException;
 
-public class TestLogin {
+public class TestBothRole {
     public static void main(String[] args) {
         Address address = new Address("123 Main St", "Springfield", "IL", "62704");
 
@@ -29,12 +31,17 @@ public class TestLogin {
         if (loggedInUser != null) {
             System.out.println("Login successful!");
 
+
             if(loggedInUser.getRole("Librarian") != null && loggedInUser.getRole("Administrator") != null){
                 System.out.println("Both Admin and Librarian");
+                //if user is a librarianRole, use librarianRole.method()
+                Librarian librarianRole = (Librarian) loggedInUser.getRole("Librarian");
+                //if user is a administrator, use administratorRole.method()
+                Administrator administratorRole = (Administrator) loggedInUser.getRole("Administrator");
             }else if (loggedInUser.getRole("Librarian") != null) {
                 Librarian librarianRole = (Librarian) loggedInUser.getRole("Librarian");
             }else if (loggedInUser.getRole("Administrator") != null) {
-                Administrator administrator = (Administrator) loggedInUser.getRole("Administrator");
+                Administrator administratorRole = (Administrator) loggedInUser.getRole("Administrator");
             }else{
                 System.out.println("Login fail");
             }

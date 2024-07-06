@@ -54,34 +54,7 @@ public class Administrator extends UserRole implements Serializable {
         book.createNewCopy();
         book.saveBook();
         System.out.println("New copy book added successfully!");
-
     }
-
-//    public void getMembers() {
-//        // Deserialize existing members
-//        List<Member> members;
-//        try {
-//            members = DataAccess.getMembersList();
-//        } catch (IOException | ClassNotFoundException e) {
-//            e.printStackTrace();
-//            return;
-//        }
-//
-//        // Display the list of members
-//        System.out.println("List of Members:");
-//        for (Member member : members) {
-//            System.out.println(member.getMemberId());
-//        }
-//    }
-
-    public void editMember() {
-        System.out.println("Editing a member.");
-    }
-
-    public void addNewBok() {
-        System.out.println("Adding a book.");
-    }
-
 
     public String getRoleName() {
         return "Administrator";

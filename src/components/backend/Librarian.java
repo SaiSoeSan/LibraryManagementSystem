@@ -28,6 +28,14 @@ public class Librarian extends UserRole implements Serializable {
     }
 
 
+    public List<CheckoutEntry> getMemberCheckoutRecord(String memberId) throws MemberNotFoundException {
+        Member member = DataAccess.readMember(memberId);
+        if (member == null) {
+            throw new MemberNotFoundException("Member id is inavalid");
+        }
+        List<CheckoutEntry> checkoutEntries = member.getCheckoutRecord();
+        return checkoutEntries;
+
     public Member getMemberById(String id) {
        return DataAccess.readMember(id);
     }
