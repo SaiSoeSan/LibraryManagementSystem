@@ -1,5 +1,4 @@
 package components.backend;
-
 import java.io.Serializable;
 
 public abstract class UserRole implements Serializable {
@@ -12,5 +11,4 @@ public abstract class UserRole implements Serializable {
     }
 
     public abstract String getRoleName();
-
 }

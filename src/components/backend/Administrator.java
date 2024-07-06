@@ -24,15 +24,10 @@ public class Administrator extends UserRole implements Serializable {
             e.printStackTrace();
         }
         System.out.println("New member added successfully!");
-
-
     }
-
-
     public Book searchBookByIsbn(String isbn) {
-        return null;
+        return DataAccess.readBook(isbn);
     }
-
 
     public void addNewBook(String isbn, String title, List<Author> authors, int maxCheckoutLength,
                            int numberOfCopies) {
@@ -50,7 +45,7 @@ public class Administrator extends UserRole implements Serializable {
     }
 
     public void addCopyOfBook(String isbn) throws IOException {
-        Book book = User.searchBookByIsbn(isbn);
+        Book book = DataAccess.readBook(isbn);
         book.createNewCopy();
         book.saveBook();
         System.out.println("New copy book added successfully!");

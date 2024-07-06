@@ -16,14 +16,6 @@ public class BookCopy implements Serializable {
             this.availability = availability;
     }
 
-    public boolean isAvailable() {
-        return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
-    }
-
     public String getUniqueNumber() {
         return uniqueNumber;
     }

@@ -41,10 +41,6 @@ public class Book implements Serializable, Comparable<Book> {
         return bookCopyList;
     }
 
-    public void setBookCopyList(List<BookCopy> bookCopyList) {
-        this.bookCopyList = bookCopyList;
-    }
-
     public void saveBook() throws IOException {
         DataAccess.saveBook(this);;
     }
@@ -56,27 +52,6 @@ public class Book implements Serializable, Comparable<Book> {
     public String getTitle() {
         return title;
     }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-    //    public boolean isAvailable() {
-//        return availability;
-//    }
-
-//    public void setAvailability(boolean availability) {
-//        this.availability = availability;
-//    }
-
-//    public String getUniqueNumber() {
-//        return uniqueNumber;
-//    }
-
-//    @Override
-//    public String toString() {
-//        return "BookCopy [uniqueNumber=" + uniqueNumber + ", availability=" + availability + "]";
-//    }
-
 
     @Override
     public String toString() {
