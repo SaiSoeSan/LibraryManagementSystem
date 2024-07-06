@@ -1,13 +1,14 @@
 import components.backend.Address;
 import components.backend.Administrator;
 import components.backend.DataAccess;
+import components.backend.Exception.BookNotFoundException;
 import components.backend.User;
 
 import java.io.IOException;
 
 public class TestAddBookCopy {
     public static void main(String[] args) {
-        Address address = new Address("123 Main St", "Springfield", "IL", "62704");
+        Address address = Address.CreateNewAddress("123 Main St", "Springfield", "IL", "62704");
 
         // Create users
         User admin = new User("admin1", "adminPass", "Alice", "Smith", "123-456-7890", address);
@@ -33,7 +34,7 @@ public class TestAddBookCopy {
                 Administrator administrator = (Administrator) loggedInUser.getRole("Administrator");
                 try {
                     administrator.addCopyOfBook("22222");
-                } catch (IOException e) {
+                } catch (IOException | BookNotFoundException e) {
                     throw new RuntimeException(e);
                 }
 

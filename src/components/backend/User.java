@@ -30,10 +30,6 @@ public class User extends Person implements Serializable {
         return this.id.equals(id) && this.password.equals(password);
     }
 
-    public static Book searchBookByIsbn(String isbn) {
-        return DataAccess.readBook(isbn);
-    }
-
     public static User login(String id, String password) {
         User user = DataAccess.readUser(id);
         if (user != null && user.verifyCredentials(id, password)) {
@@ -44,8 +40,4 @@ public class User extends Person implements Serializable {
 
     // Getters and setters
     public String getId() { return id; }
-    public void setId(String id) { this.id = id; }
-
-    public String getPassword() { return password; }
-    public void setPassword(String password) { this.password = password; }
 }

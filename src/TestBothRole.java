@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class TestBothRole {
     public static void main(String[] args) {
-        Address address = new Address("123 Main St", "Springfield", "IL", "62704");
+        Address address = Address.CreateNewAddress("123 Main St", "Springfield", "IL", "62704");
 
         // Create users
         User admin = new User("admin1", "adminPass", "Alice", "Smith", "123-456-7890", address);
@@ -17,7 +17,7 @@ public class TestBothRole {
         Librarian libRole = new Librarian(librarian);
 
         admin.addRole("Administrator", adminRole);
-        admin.addRole("Librarian",libRole);
+        admin.addRole("Librarian", libRole);
         librarian.addRole("Librarian", libRole);
 
         try {
@@ -32,17 +32,17 @@ public class TestBothRole {
             System.out.println("Login successful!");
 
 
-            if(loggedInUser.getRole("Librarian") != null && loggedInUser.getRole("Administrator") != null){
+            if (loggedInUser.getRole("Librarian") != null && loggedInUser.getRole("Administrator") != null) {
                 System.out.println("Both Admin and Librarian");
                 //if user is a librarianRole, use librarianRole.method()
                 Librarian librarianRole = (Librarian) loggedInUser.getRole("Librarian");
                 //if user is a administrator, use administratorRole.method()
                 Administrator administratorRole = (Administrator) loggedInUser.getRole("Administrator");
-            }else if (loggedInUser.getRole("Librarian") != null) {
+            } else if (loggedInUser.getRole("Librarian") != null) {
                 Librarian librarianRole = (Librarian) loggedInUser.getRole("Librarian");
-            }else if (loggedInUser.getRole("Administrator") != null) {
+            } else if (loggedInUser.getRole("Administrator") != null) {
                 Administrator administratorRole = (Administrator) loggedInUser.getRole("Administrator");
-            }else{
+            } else {
                 System.out.println("Login fail");
             }
         }

@@ -21,14 +21,6 @@ public class DataAccess {
         userMap = readHashMapFromFile(USER_FILE_PATH);
     }
 
-    // Deserialize to an object from the specified file
-    public static Object deserialize(String fileName) throws IOException, ClassNotFoundException {
-        try (FileInputStream fileIn = new FileInputStream(fileName);
-             ObjectInputStream in = new ObjectInputStream(fileIn)) {
-            return in.readObject();
-        }
-    }
-
     // Read HashMap from file
     @SuppressWarnings("unchecked")
     private static <T> HashMap<String, T> readHashMapFromFile(String filePath) {

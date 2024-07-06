@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class TestAddBook {
     public static void main(String[] args) {
-        Address address = new Address("123 Main St", "Springfield", "IL", "62704");
+        Address address = Address.CreateNewAddress("123 Main St", "Springfield", "IL", "62704");
 
         // Create users
         User admin = new User("admin1", "adminPass", "Alice", "Smith", "123-456-7890", address);
@@ -39,7 +39,7 @@ public class TestAddBook {
                 int countOfAuthors = 2;
                 int numberOfCopies = 2;
 
-                administrator.addNewBook(isnb,title, new ArrayList<>(),maxCheckoutLen,numberOfCopies);
+                administrator.addNewBook(isnb, title, new ArrayList<>(), maxCheckoutLen, numberOfCopies);
 
             } else {
                 System.out.println("Login failed.");

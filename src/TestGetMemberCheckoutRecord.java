@@ -7,8 +7,8 @@ import java.util.List;
 
 public class TestGetMemberCheckoutRecord {
     public static void main(String[] args) throws BookNotFoundException, IOException, MemberNotFoundException, ClassNotFoundException {
-        Address address = new Address("123 Main St", "Springfield", "IL", "62704");
-
+        Address address = Address.CreateNewAddress("123 Main St", "Springfield", "IL", "62704");
+        Author author = new Author("Test", "LastName", "123", address, "bio", "credentails");
         // Create users
         User admin = new User("admin", "adminPass", "Alice", "Smith", "123-456-7890", address);
         User librarian = new User("librarian", "librarianPass", "Bob", "Johnson", "098-765-4321", address);
@@ -40,8 +40,8 @@ public class TestGetMemberCheckoutRecord {
                 // Add new Member with checkout entries
                 administrator.addNewMember("100", "Abdul", "Moiz", "1000 N 4th Street", "Fairfield", "IA", "52554", "641233333");
                 administrator.addNewMember("101", "Abdul", "Moiz", "1000 N 4th Street", "Fairfield", "IA", "52554", "641233333");
-                administrator.addNewBook("5001", "Atomic Habits", 1, 10, 10);
-                administrator.addNewBook("5002", "Rich dad poor dad", 1, 10, 10);
+                administrator.addNewBook("5001", "Atomic Habits", List.of(author), 10, 10);
+                administrator.addNewBook("5002", "Rich dad poor dad", List.of(author), 10, 10);
 
                 Member.checkoutBook("100", "5001");
                 Member.checkoutBook("100", "5002");

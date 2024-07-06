@@ -150,7 +150,7 @@ public class AddBookWindow extends JFrame implements LibWindow {
                 String credentials = authorFieldSet.credentialsField.getText();
                 String bio = authorFieldSet.bioField.getText();
 
-                Address address = new Address(street, city, state, zip);
+                Address address = Address.CreateNewAddress(street, city, state, zip);
 
                 Author author = new Author(firstName, lastName, phone, address, bio, credentials);
                 authors.add(author);
