@@ -44,7 +44,7 @@ public class LibrarianWindow extends JFrame implements LibWindow {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         JPanel labelPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JLabel label = new JLabel("Librarian Functions");
+        JLabel label = new JLabel("Welcome..");
         Util.adjustLabelFont(label, Util.DARK_BLUE, true);
         labelPanel.add(label);
 
@@ -64,8 +64,8 @@ public class LibrarianWindow extends JFrame implements LibWindow {
 
         buttonPanel.add(checkoutBookButton);
         buttonPanel.add(printCheckoutRecordButton);
-        buttonPanel.add(searchMemberButton);
-        buttonPanel.add(searchBookButton);
+//        buttonPanel.add(searchMemberButton);
+//        buttonPanel.add(searchBookButton);
         buttonPanel.add(backButton);
 
         mainPanel.add(labelPanel, BorderLayout.NORTH);

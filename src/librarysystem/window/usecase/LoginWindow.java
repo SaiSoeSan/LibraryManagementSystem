@@ -192,6 +192,7 @@ public class LoginWindow extends JFrame implements LibWindow {
 						case 0 -> showAdminWindow(loggedInUser);
 						case 1 -> showLibrarianWindow(loggedInUser);
 					}
+					return;
 				}
 				if (loggedInUser.getRole("Librarian") != null) {
 					System.out.println("User is a Librarian");

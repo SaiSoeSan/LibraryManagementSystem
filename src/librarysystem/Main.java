@@ -1,7 +1,6 @@
 package librarysystem;
 
-import librarysystem.window.usecase.LoginWindow;
-
+import javax.swing.*;
 import java.awt.*;
 
 
@@ -15,6 +14,7 @@ public class Main {
 
 				 LibrarySystem.INSTANCE.init();
 				 LibrarySystem.INSTANCE.setVisible(true);
+				 LibrarySystem.INSTANCE.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				 Util.centerFrameOnDesktop(LibrarySystem.INSTANCE);
 	         });
 	   }
